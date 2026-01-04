@@ -1,8 +1,8 @@
-PWD /Users/lequangtrung123/Documents/Code/Latex/CS115/Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems
+PWD /Users/lequangtrung123/Documents/Code/Latex/CS115/Slide
 INPUT /usr/local/texlive/2025basic/texmf.cnf
 INPUT /usr/local/texlive/2025basic/texmf-dist/web2c/texmf.cnf
 INPUT /Users/lequangtrung123/Library/texlive/2025basic/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/lequangtrung123/Documents/Code/Latex/CS115/Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems/CS115.tex
+INPUT /Users/lequangtrung123/Documents/Code/Latex/CS115/Slide/CS115.tex
 OUTPUT CS115.log
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT /usr/local/texlive/2025basic/texmf-dist/tex/latex/beamer/beamer.cls
