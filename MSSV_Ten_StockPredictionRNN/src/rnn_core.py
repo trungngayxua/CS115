@@ -1,127 +1,110 @@
-"""
-Traditional RNN core: manual forward pass and BPTT gradients.
-
-The implementation follows the equations in CS115.tex:
-    h_t = tanh(x_t @ W_xh + h_{t-1} @ W_hh + b_h)
-    o_t = h_t @ W_qh + b_q
-The backward method unrolls through time (BPTT) to accumulate gradients for
-W_xh, W_hh, W_qh and the biases.
-"""
-from __future__ import annotations
-
 import numpy as np
 
-class TraditionalRNN:
-    def __init__(self, input_size: int, hidden_size: int, output_size: int, rng: np.random.Generator):
+
+class RNN:
+    def __init__(self, input_size: int, hidden_size: int, output_size: int, seed: int = 42):
+        rng = np.random.default_rng(seed)
+        self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
-        self.rng = rng
 
-        # Weight matrices and biases
-        self.W_xh = rng.normal(scale=0.1, size=(input_size, hidden_size))
+        self.W_hx = rng.normal(scale=0.1, size=(input_size, hidden_size))
         self.W_hh = rng.normal(scale=0.1, size=(hidden_size, hidden_size))
         self.W_qh = rng.normal(scale=0.1, size=(hidden_size, output_size))
-        self.b_h = np.zeros((1, hidden_size))
-        self.b_q = np.zeros((1, output_size))
+        self.b_h = np.zeros(hidden_size)
+        self.b_q = np.zeros(output_size)
 
-        # Cache used for BPTT
-        self._cache = {}
-
-    def forward(self, x_seq: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-        """
-        Run the forward pass over a full sequence.
-
-        Args:
-            x_seq: Array of shape (T, input_size)
-        Returns:
-            outputs: (T, output_size)
-            hidden_states: (T, hidden_size)
-        """
+    def forward(self, x_seq, h0=None, return_cache: bool = False):
+        """Forward cho mot chuoi (T, input_size). Tra outputs (T, output_size) va h_T."""
+        x_seq = np.asarray(x_seq, dtype=float)
+        if x_seq.ndim == 1:
+            x_seq = x_seq.reshape(-1, self.input_size)
         T = x_seq.shape[0]
-        h_states = np.zeros((T + 1, self.hidden_size))
-        outputs = np.zeros((T, self.output_size))
+        h_prev = np.zeros(self.hidden_size) if h0 is None else h0
+
+        hs = [h_prev]
+        pre_acts = []
+        outputs = []
 
         for t in range(T):
-            # h_t = tanh(x_t W_xh + h_{t-1} W_hh + b_h)
-            h_states[t + 1] = np.tanh(
-                x_seq[t : t + 1] @ self.W_xh + h_states[t : t + 1] @ self.W_hh + self.b_h
-            )
-            # o_t = h_t W_qh + b_q
-            outputs[t : t + 1] = h_states[t + 1 : t + 2] @ self.W_qh + self.b_q
+            a_t = x_seq[t].dot(self.W_hx) + h_prev.dot(self.W_hh) + self.b_h
+            h_t = np.tanh(a_t)
+            o_t = h_t.dot(self.W_qh) + self.b_q
 
-        # Store cache for BPTT
-        self._cache = {"inputs": x_seq, "hidden_states": h_states, "outputs": outputs}
-        return outputs, h_states[1:]
+            pre_acts.append(a_t)
+            outputs.append(o_t)
+            hs.append(h_t)
+            h_prev = h_t
 
-    def backward(self, y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, np.ndarray]:
-        """
-        Backpropagation Through Time (BPTT) for a single sequence.
+        out_arr = np.vstack(outputs)
+        cache = None
+        if return_cache:
+            cache = {
+                "x_seq": x_seq,
+                "hs": hs,
+                "pre_acts": pre_acts,
+                "outputs": out_arr,
+            }
+        return out_arr, h_prev, cache
 
-        Args:
-            y_true: Ground-truth targets. If shape == outputs shape, loss is computed per time step.
-                    Otherwise only the final time step is used (sequence-to-one setup).
-            y_pred: Model outputs from the last forward pass (shape: T x output_size).
-        Returns:
-            Dictionary of gradients for each parameter.
-        """
-        if not self._cache:
-            raise RuntimeError("Call forward() before backward().")
+    def backward(self, cache: dict, target: np.ndarray):
+        """BPTT cho loss 0.5*(o_T - y)^2. Chi dung output cuoi chuoi."""
+        x_seq = cache["x_seq"]
+        hs = cache["hs"]
+        pre_acts = cache["pre_acts"]
+        outputs = cache["outputs"]
 
-        outputs = y_pred
-        inputs = self._cache["inputs"]
-        h_states = self._cache["hidden_states"]
-        T = outputs.shape[0]
-
-        # Decide loss mode: per-step (sequence-to-sequence) or only final step (sequence-to-one)
-        use_full_sequence = y_true.shape == outputs.shape
-        y_true_arr = y_true
-        if not use_full_sequence:
-            y_true_arr = np.asarray(y_true).reshape(1, -1)
+        T = x_seq.shape[0]
+        target = np.asarray(target).reshape(-1)
+        o_T = outputs[-1].reshape(-1)
 
         grads = {
-            "W_xh": np.zeros_like(self.W_xh),
+            "W_hx": np.zeros_like(self.W_hx),
             "W_hh": np.zeros_like(self.W_hh),
             "W_qh": np.zeros_like(self.W_qh),
             "b_h": np.zeros_like(self.b_h),
             "b_q": np.zeros_like(self.b_q),
         }
 
-        dh_next = np.zeros((1, self.hidden_size))
+        dL_do = o_T - target  # derivative of 0.5*(o - y)^2
+        grads["W_qh"] += np.outer(hs[-1], dL_do)
+        grads["b_q"] += dL_do
+
+        d_next = dL_do.dot(self.W_qh.T)
 
         for t in reversed(range(T)):
-            if use_full_sequence:
-                dy = (outputs[t] - y_true_arr[t]) / max(T, 1)
-            else:
-                if t != T - 1:
-                    continue
-                dy = outputs[t] - y_true_arr
+            h_t = hs[t + 1]
+            h_prev = hs[t]
+            a_t = pre_acts[t]
+            x_t = x_seq[t]
 
-            dy = dy.reshape(1, -1)
-            h_t = h_states[t + 1 : t + 2]
-            h_prev = h_states[t : t + 1]
+            dh = d_next
+            da = dh * (1.0 - h_t**2)  # tanh'
 
-            # Gradients for output layer
-            grads["W_qh"] += h_t.T @ dy
-            grads["b_q"] += dy
+            grads["W_hx"] += np.outer(x_t, da)
+            grads["W_hh"] += np.outer(h_prev, da)
+            grads["b_h"] += da
 
-            # Propagate to hidden
-            dh = dy @ self.W_qh.T + dh_next
-            dh_raw = (1.0 - h_t**2) * dh  # derivative of tanh
+            d_next = da.dot(self.W_hh.T)
 
-            grads["W_xh"] += inputs[t : t + 1].T @ dh_raw
-            grads["W_hh"] += h_prev.T @ dh_raw
-            grads["b_h"] += dh_raw
+        loss = 0.5 * np.mean((o_T - target) ** 2)
+        return loss, grads
 
-            dh_next = dh_raw @ self.W_hh.T
+    def apply_grads(self, grads: dict, lr: float) -> None:
+        self.W_hx -= lr * grads["W_hx"]
+        self.W_hh -= lr * grads["W_hh"]
+        self.W_qh -= lr * grads["W_qh"]
+        self.b_h -= lr * grads["b_h"]
+        self.b_q -= lr * grads["b_q"]
 
-        return grads
+    def get_parameters(self):
+        weights = {"W_hx": self.W_hx, "W_hh": self.W_hh, "W_qh": self.W_qh}
+        biases = {"b_h": self.b_h, "b_q": self.b_q}
+        return weights, biases
 
-    def parameters(self) -> dict[str, np.ndarray]:
-        return {
-            "W_xh": self.W_xh,
-            "W_hh": self.W_hh,
-            "W_qh": self.W_qh,
-            "b_h": self.b_h,
-            "b_q": self.b_q,
-        }
-
+    def load_parameters(self, weights: dict, biases: dict) -> None:
+        self.W_hx = weights["W_hx"]
+        self.W_hh = weights["W_hh"]
+        self.W_qh = weights["W_qh"]
+        self.b_h = biases["b_h"]
+        self.b_q = biases["b_q"]

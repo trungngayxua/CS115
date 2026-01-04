@@ -1,39 +1,18 @@
-"""
-Optimizer utilities: gradient clipping and parameter update.
-
-Gradient clipping uses the formula from the slides:
-    g <- g / max(1, ||g|| / tau)
-so gradients with norm larger than tau are scaled down to avoid exploding values.
-"""
-from __future__ import annotations
-
 import numpy as np
 
 
-def gradients_l2_norm(gradients: dict[str, np.ndarray]) -> float:
-    return float(np.sqrt(sum(np.sum(g**2) for g in gradients.values())))
+def clip_gradients(grads: dict, tau: float):
+    """Scale toan bo gradient neu norm vuot nguong tau."""
+    total_norm = 0.0
+    for g in grads.values():
+        total_norm += np.sum(g ** 2)
+    total_norm = float(np.sqrt(total_norm))
 
+    if total_norm > 0 and tau > 0 and total_norm > tau:
+        scale = tau / total_norm
+    else:
+        scale = 1.0
 
-def clip_gradients(gradients: dict[str, np.ndarray], tau: float) -> tuple[dict[str, np.ndarray], float, float]:
-    """
-    Scale gradients to keep their L2 norm under the threshold tau.
-
-    Returns:
-        clipped_gradients: dict with the same keys as gradients
-        raw_norm: L2 norm before clipping
-        clipped_norm: L2 norm after clipping
-    """
-    raw_norm = gradients_l2_norm(gradients)
-    if raw_norm == 0:
-        return {k: v.copy() for k, v in gradients.items()}, raw_norm, raw_norm
-
-    scale = min(1.0, tau / raw_norm)
-    clipped = {k: v * scale for k, v in gradients.items()}
-    clipped_norm = gradients_l2_norm(clipped)
-    return clipped, raw_norm, clipped_norm
-
-
-def apply_gradients(params: dict[str, np.ndarray], gradients: dict[str, np.ndarray], lr: float) -> None:
-    for name, grad in gradients.items():
-        params[name] -= lr * grad
-
+    clipped = {k: v * scale for k, v in grads.items()}
+    clipped_norm = float(np.sqrt(sum(np.sum(g ** 2) for g in clipped.values())))
+    return clipped, total_norm, clipped_norm

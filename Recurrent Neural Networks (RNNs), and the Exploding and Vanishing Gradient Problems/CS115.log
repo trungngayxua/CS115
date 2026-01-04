@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  4 JAN 2026 23:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  5 JAN 2026 02:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -849,92 +849,116 @@ Package bm Info: No bold for \U/msa/m/n, using \pmb.
 Package bm Info: No bold for \U/msb/m/n, using \pmb.
 \symboldpureletters=\mathgroup10
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
-) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count366
+\lst@gtempboxa=\box80
+\lst@token=\toks49
+\lst@length=\count367
+\lst@currlwidth=\dimen314
+\lst@column=\count368
+\lst@pos=\count369
+\lst@lostspace=\dimen315
+\lst@width=\dimen316
+\lst@newlines=\count370
+\lst@lineno=\count371
+\lst@maxwidth=\dimen317
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count372
+\lst@skipnumbers=\count373
+\lst@framebox=\box81
+) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfnodeparttextbox=\box80
+\pgfnodeparttextbox=\box82
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@nodesepstart=\dimen314
-\pgf@nodesepend=\dimen315
+\pgf@nodesepstart=\dimen318
+\pgf@nodesepend=\dimen319
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
 )) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
-\pgffor@iter=\dimen316
-\pgffor@skip=\dimen317
-\pgffor@stack=\toks49
-\pgffor@toks=\toks50
+\pgffor@iter=\dimen320
+\pgffor@skip=\dimen321
+\pgffor@stack=\toks50
+\pgffor@toks=\toks51
 )) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@plot@mark@count=\count366
-\pgfplotmarksize=\dimen318
+\pgf@plot@mark@count=\count374
+\pgfplotmarksize=\dimen322
 )
-\tikz@lastx=\dimen319
-\tikz@lasty=\dimen320
-\tikz@lastxsaved=\dimen321
-\tikz@lastysaved=\dimen322
-\tikz@lastmovetox=\dimen323
-\tikz@lastmovetoy=\dimen324
-\tikzleveldistance=\dimen325
-\tikzsiblingdistance=\dimen326
-\tikz@figbox=\box81
-\tikz@figbox@bg=\box82
-\tikz@tempbox=\box83
-\tikz@tempbox@bg=\box84
-\tikztreelevel=\count367
-\tikznumberofchildren=\count368
-\tikznumberofcurrentchild=\count369
-\tikz@fig@count=\count370
+\tikz@lastx=\dimen323
+\tikz@lasty=\dimen324
+\tikz@lastxsaved=\dimen325
+\tikz@lastysaved=\dimen326
+\tikz@lastmovetox=\dimen327
+\tikz@lastmovetoy=\dimen328
+\tikzleveldistance=\dimen329
+\tikzsiblingdistance=\dimen330
+\tikz@figbox=\box83
+\tikz@figbox@bg=\box84
+\tikz@tempbox=\box85
+\tikz@tempbox@bg=\box86
+\tikztreelevel=\count375
+\tikznumberofchildren=\count376
+\tikznumberofcurrentchild=\count377
+\tikz@fig@count=\count378
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfmatrixcurrentrow=\count371
-\pgfmatrixcurrentcolumn=\count372
-\pgf@matrix@numberofcolumns=\count373
+\pgfmatrixcurrentrow=\count379
+\pgfmatrixcurrentcolumn=\count380
+\pgf@matrix@numberofcolumns=\count381
 )
-\tikz@expandcount=\count374
+\tikz@expandcount=\count382
  (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ))) (/usr/local/texlive/2025basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count375
+\l__color_backend_stack_int=\count383
 ) (./CS115.aux
 Package babel Info: 'vietnamese' activates 'vietnamese' shorthands.
 (babel)             Reported on input line 8.
 )
 \openout1 = `CS115.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 33.
-LaTeX Font Info:    Trying to load font information for T5+cmr on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 42.
+LaTeX Font Info:    Trying to load font information for T5+cmr on input line 42.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/vntex/t5cmr.fd
 File: t5cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    ... okay on input line 42.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -972,85 +996,85 @@ LaTeX Font Info:    ... okay on input line 33.
 
 (/usr/local/texlive/2025basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count376
-\scratchdimen=\dimen327
-\scratchbox=\box85
-\nofMPsegments=\count377
-\nofMParguments=\count378
-\everyMPshowfont=\toks51
-\MPscratchCnt=\count379
-\MPscratchDim=\dimen328
-\MPnumerator=\count380
-\makeMPintoPDFobject=\count381
-\everyMPtoPDFconversion=\toks52
+\scratchcounter=\count384
+\scratchdimen=\dimen331
+\scratchbox=\box87
+\nofMPsegments=\count385
+\nofMParguments=\count386
+\everyMPshowfont=\toks52
+\MPscratchCnt=\count387
+\MPscratchDim=\dimen332
+\MPnumerator=\count388
+\makeMPintoPDFobject=\count389
+\everyMPtoPDFconversion=\toks53
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 33.
+Package hyperref Info: Link coloring OFF on input line 42.
  (./CS115.out) (./CS115.out)
 \@outlinefile=\write5
 \openout5 = `CS115.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 33.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 42.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 33.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 42.
 \symnumbers=\mathgroup11
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 33.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 42.
 LaTeX Font Info:    Encoding `OT1' has changed to `T5' for symbol font
-(Font)              `pureletters' in the math version `normal' on input line 33.
+(Font)              `pureletters' in the math version `normal' on input line 42.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/mathkerncmss/m/sl --> T5/cmss/m/it on input line 33.
+(Font)                  OT1/mathkerncmss/m/sl --> T5/cmss/m/it on input line 42.
 LaTeX Font Info:    Encoding `OT1' has changed to `T5' for symbol font
-(Font)              `pureletters' in the math version `bold' on input line 33.
+(Font)              `pureletters' in the math version `bold' on input line 42.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/bx/sl --> T5/cmss/m/it on input line 33.
+(Font)                  OT1/mathkerncmss/bx/sl --> T5/cmss/m/it on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> T5/cmr/m/n on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 33.
+(Font)                  OT1/cmss/m/n --> T5/cmr/m/n on input line 42.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 42.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> T5/cmss/m/n on input line 33.
+(Font)                  OT1/cmss/m/n --> T5/cmss/m/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T5/cmss/m/n on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 33.
+(Font)                  OT1/cmss/bx/n --> T5/cmss/m/n on input line 42.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> T5/cmss/m/it on input line 33.
+(Font)                  OT1/cmr/m/it --> T5/cmss/m/it on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> T5/cmss/m/it on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 33.
+(Font)                  OT1/cmr/bx/it --> T5/cmss/m/it on input line 42.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> T5/cmtt/m/n on input line 33.
+(Font)                  OT1/cmtt/m/n --> T5/cmtt/m/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> T5/cmtt/m/n on input line 33.
+(Font)                  OT1/cmtt/m/n --> T5/cmtt/m/n on input line 42.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T5/cmss/m/n --> T5/cmss/b/n on input line 33.
+(Font)                  T5/cmss/m/n --> T5/cmss/b/n on input line 42.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T5/cmss/m/it --> T5/cmss/b/it on input line 33.
+(Font)                  T5/cmss/m/it --> T5/cmss/b/it on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> T5/cmr/b/n on input line 33.
+(Font)                  OT1/cmss/b/n --> T5/cmr/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T5/cmss/b/n --> T5/cmss/b/n on input line 33.
+(Font)                  T5/cmss/b/n --> T5/cmss/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T5/cmss/m/n --> T5/cmss/b/n on input line 33.
+(Font)                  T5/cmss/m/n --> T5/cmss/b/n on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T5/cmss/m/it --> T5/cmss/b/it on input line 33.
+(Font)                  T5/cmss/m/it --> T5/cmss/b/it on input line 42.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T5/cmtt/m/n --> T5/cmtt/b/n on input line 33.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 33.
+(Font)                  T5/cmtt/m/n --> T5/cmtt/b/n on input line 42.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 42.
 LaTeX Font Info:    Encoding `T5' has changed to `OT1' for symbol font
-(Font)              `pureletters' in the math version `normal' on input line 33.
+(Font)              `pureletters' in the math version `normal' on input line 42.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  T5/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 33.
+(Font)                  T5/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 42.
 LaTeX Font Info:    Encoding `T5' has changed to `OT1' for symbol font
-(Font)              `pureletters' in the math version `bold' on input line 33.
+(Font)              `pureletters' in the math version `bold' on input line 42.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T5/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 33.
+(Font)                  T5/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 42.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 33.
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 42.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -1063,23 +1087,25 @@ Dictionary: translator-months-dictionary, Language: English
 Dictionary: translator-numbers-dictionary, Language: English 
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-) (./CS115.nav)
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 33--33
+)
+\c@lstlisting=\count390
+ (./CS115.nav)
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 42--42
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 33--33
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 42--42
  [][][][]  
  []
 
 
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 35--35
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 44--44
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 35--35
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 44--44
  [][][][]  
  []
 
@@ -1098,12 +1124,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [1
 
 {/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 41--41
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 50--50
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 41--41
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 50--50
  [][][][]  
  []
 
@@ -1122,12 +1148,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [2
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 50--50
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 59--59
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 50--50
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 59--59
  [][][][]  
  []
 
@@ -1146,12 +1172,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [3
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 58--58
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 67--67
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 58--58
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 67--67
  [][][][]  
  []
 
@@ -1170,24 +1196,24 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [4
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 62--62
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 71--71
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 62--62
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 71--71
  [][][][]  
  []
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 62.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 71.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 62.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 71.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 62.
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 71.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
 )
@@ -1205,12 +1231,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [5
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 70--70
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 79--79
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 70--70
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 79--79
  [][][][]  
  []
 
@@ -1229,12 +1255,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [6
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 78--78
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 87--87
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 78--78
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 87--87
  [][][][]  
  []
 
@@ -1253,12 +1279,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [7
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 93--93
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 102--102
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 93--93
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 102--102
  [][][][]  
  []
 
@@ -1277,19 +1303,19 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [8
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 103--103
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 116--116
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 103--103
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 116--116
  [][][][]  
  []
 
 <template-1_image_page11_1.png, id=283, 252.19218pt x 250.68657pt>
 File: template-1_image_page11_1.png Graphic file (type png)
 <use template-1_image_page11_1.png>
-Package pdftex.def Info: template-1_image_page11_1.png  used on input line 103.
+Package pdftex.def Info: template-1_image_page11_1.png  used on input line 116.
 (pdftex.def)             Requested size: 188.26346pt x 187.14232pt.
 
 
@@ -1306,19 +1332,19 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [9
 
  <./template-1_image_page11_1.png (PNG copy)>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 113--113
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 130--130
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 113--113
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 130--130
  [][][][]  
  []
 
 <template-1_image_page12_1.png, id=311, 324.46219pt x 176.91093pt>
 File: template-1_image_page12_1.png Graphic file (type png)
 <use template-1_image_page12_1.png>
-Package pdftex.def Info: template-1_image_page12_1.png  used on input line 113.
+Package pdftex.def Info: template-1_image_page12_1.png  used on input line 130.
 (pdftex.def)             Requested size: 239.60567pt x 130.64479pt.
 
 
@@ -1335,19 +1361,19 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [10
 
  <./template-1_image_page12_1.png (PNG copy)>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 123--123
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 144--144
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 123--123
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 144--144
  [][][][]  
  []
 
 <template-1_image_page13_1.png, id=339, 398.23781pt x 279.29344pt>
 File: template-1_image_page13_1.png Graphic file (type png)
 <use template-1_image_page13_1.png>
-Package pdftex.def Info: template-1_image_page13_1.png  used on input line 123.
+Package pdftex.def Info: template-1_image_page13_1.png  used on input line 144.
 (pdftex.def)             Requested size: 239.60567pt x 168.04187pt.
 
 
@@ -1364,22 +1390,22 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [11
 
  <./template-1_image_page13_1.png (PNG copy)>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 134--134
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 159--159
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 134--134
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 159--159
  [][][][]  
  []
 
 <template-1_image_page14_1.png, id=366, 375.65344pt x 250.68657pt>
 File: template-1_image_page14_1.png Graphic file (type png)
 <use template-1_image_page14_1.png>
-Package pdftex.def Info: template-1_image_page14_1.png  used on input line 134.
+Package pdftex.def Info: template-1_image_page14_1.png  used on input line 159.
 (pdftex.def)             Requested size: 239.60567pt x 159.89949pt.
 
-Overfull \vbox (10.0661pt too high) detected at line 134
+Overfull \vbox (10.0661pt too high) detected at line 159
  []
 
 
@@ -1397,12 +1423,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [12
 
  <./template-1_image_page14_1.png (PNG copy)>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 142--142
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 167--167
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 142--142
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 167--167
  [][][][]  
  []
 
@@ -1421,12 +1447,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [13
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 153--153
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 178--178
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 153--153
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 178--178
  [][][][]  
  []
 
@@ -1445,12 +1471,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [14
 
 {/usr/local/texlive/2025basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 168--168
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 193--193
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 168--168
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 193--193
  [][][][]  
  []
 
@@ -1469,12 +1495,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [15
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 187--187
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 212--212
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 187--187
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 212--212
  [][][][]  
  []
 
@@ -1493,12 +1519,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [16
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 247--247
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 272--272
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 247--247
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 272--272
  [][][][]  
  []
 
@@ -1519,18 +1545,18 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [17
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 267--267
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 292--292
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 267--267
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 292--292
  [][][][]  
  []
 
 
 LaTeX Font Warning: Font shape `T5/cmss/b/n' undefined
-(Font)              using `T5/cmss/m/n' instead on input line 267.
+(Font)              using `T5/cmss/m/n' instead on input line 292.
 
 
 
@@ -1547,15 +1573,17 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [18
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 280--280
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 358--358
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 280--280
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 358--358
  [][][][]  
  []
 
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 
@@ -1571,12 +1599,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [19
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 302--302
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 371--371
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 302--302
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 371--371
  [][][][]  
  []
 
@@ -1595,20 +1623,18 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [20
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 323--323
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 441--441
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 323--323
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 441--441
  [][][][]  
  []
 
-
-Overfull \hbox (13.35356pt too wide) detected at line 323
-[]
- []
-
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 
@@ -1624,22 +1650,13 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [21
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 355--355
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 463--463
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 355--355
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 463--463
  [][][][]  
- []
-
-
-Overfull \hbox (13.22806pt too wide) detected at line 355
-[]
- []
-
-
-Overfull \vbox (9.08215pt too high) detected at line 355
  []
 
 
@@ -1657,15 +1674,18 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [22
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 378--378
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 535--535
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 378--378
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 535--535
  [][][][]  
  []
 
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 
@@ -1681,13 +1701,18 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [23
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 394--394
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 556--556
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 394--394
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 556--556
  [][][][]  
+ []
+
+
+Overfull \hbox (13.35356pt too wide) detected at line 556
+[]
  []
 
 
@@ -1705,15 +1730,17 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [24
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 413--413
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 633--633
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 413--413
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 633--633
  [][][][]  
  []
 
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 
@@ -1729,21 +1756,24 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [25
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 425--425
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 665--665
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 425--425
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 665--665
  [][][][]  
  []
 
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 425.
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 425.
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 425.
+
+Overfull \hbox (13.22806pt too wide) detected at line 665
+[]
+ []
+
+
+Overfull \vbox (9.08215pt too high) detected at line 665
+ []
+
 
 
 
@@ -1759,39 +1789,17 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [26
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 427--427
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 731--731
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 427--427
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 731--731
  [][][][]  
  []
 
-\openout4 = `CS115.vrb'.
-
-
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 459--459
- [][]  
- []
-
-
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 459--459
- [][][][]  
- []
-
-(./CS115.vrb
-
-LaTeX Font Warning: Font shape `T5/cmss/m/it' in size <10.95> not available
-(Font)              Font shape `T5/cmss/m/sl' tried instead on input line 4.
-
-LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 28.
-(/usr/local/texlive/2025basic/texmf-dist/tex/latex/vntex/t5cmtt.fd
-File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-))
-Overfull \vbox (23.56897pt too high) detected at line 459
- []
-
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 
@@ -1807,29 +1815,13 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [27
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 461--461
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 754--754
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 461--461
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 754--754
  [][][][]  
- []
-
-\openout4 = `CS115.vrb'.
-
-
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 499--499
- [][]  
- []
-
-
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 499--499
- [][][][]  
- []
-
-(./CS115.vrb)
-Overfull \vbox (67.04007pt too high) detected at line 499
  []
 
 
@@ -1847,25 +1839,17 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [28
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 518--518
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 823--823
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 518--518
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 823--823
  [][][][]  
  []
 
-<../MSSV_Ten_StockPredictionRNN/results/loss_curve_clipped.png, id=850, 433.62pt x 289.08pt>
-File: ../MSSV_Ten_StockPredictionRNN/results/loss_curve_clipped.png Graphic file (type png)
-<use ../MSSV_Ten_StockPredictionRNN/results/loss_curve_clipped.png>
-Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/loss_curve_clipped.png  used on input line 518.
-(pdftex.def)             Requested size: 164.30028pt x 109.53394pt.
-<../MSSV_Ten_StockPredictionRNN/results/gradients_norm.png, id=852, 433.62pt x 289.08pt>
-File: ../MSSV_Ten_StockPredictionRNN/results/gradients_norm.png Graphic file (type png)
-<use ../MSSV_Ten_StockPredictionRNN/results/gradients_norm.png>
-Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/gradients_norm.png  used on input line 518.
-(pdftex.def)             Requested size: 164.30028pt x 109.53394pt.
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 
@@ -1880,21 +1864,16 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 
 [29
 
- <../MSSV_Ten_StockPredictionRNN/results/loss_curve_clipped.png> <../MSSV_Ten_StockPredictionRNN/results/gradients_norm.png>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 527--527
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 839--839
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 527--527
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 839--839
  [][][][]  
  []
 
-<../MSSV_Ten_StockPredictionRNN/results/prediction_chart.png, id=881, 578.16pt x 289.08pt>
-File: ../MSSV_Ten_StockPredictionRNN/results/prediction_chart.png Graphic file (type png)
-<use ../MSSV_Ten_StockPredictionRNN/results/prediction_chart.png>
-Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/prediction_chart.png  used on input line 527.
-(pdftex.def)             Requested size: 290.9531pt x 145.47476pt.
 
 
 
@@ -1909,17 +1888,20 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 
 [30
 
- <../MSSV_Ten_StockPredictionRNN/results/prediction_chart.png>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 533--533
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 906--906
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 533--533
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 906--906
  [][][][]  
  []
 
-(./CS115.toc)
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+
 
 
 Overfull \hbox (28.78542pt too wide) has occurred while \output is active
@@ -1934,12 +1916,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [31
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 558--558
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 925--925
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 558--558
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 925--925
  [][][][]  
  []
 
@@ -1958,15 +1940,21 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [32
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 587--587
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 937--937
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 587--587
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 937--937
  [][][][]  
  []
 
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 937.
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 937.
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 937.
 
 
 
@@ -1982,12 +1970,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [33
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 621--621
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 947--947
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 621--621
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 947--947
  [][][][]  
  []
 
@@ -2006,16 +1994,37 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [34
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 634--634
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 949--949
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 634--634
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 949--949
  [][][][]  
  []
 
+\openout4 = `CS115.vrb'.
 
+
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 951--951
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 951--951
+ [][][][]  
+ []
+
+(./CS115.vrb (/usr/local/texlive/2025basic/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 2.
+ (/usr/local/texlive/2025basic/texmf-dist/tex/latex/vntex/t5cmtt.fd
+File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) (../MSSV_Ten_StockPredictionRNN/src/train.py
+LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `T5/cmtt/m/n' tried instead on input line 19.
+))
 
 
 Overfull \hbox (28.78542pt too wide) has occurred while \output is active
@@ -2030,16 +2039,28 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [35
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 657--657
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 953--953
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 657--657
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 953--953
  [][][][]  
  []
 
+\openout4 = `CS115.vrb'.
 
+
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 955--955
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 955--955
+ [][][][]  
+ []
+
+(./CS115.vrb (../MSSV_Ten_StockPredictionRNN/src/train.py))
 
 
 Overfull \hbox (28.78542pt too wide) has occurred while \output is active
@@ -2054,12 +2075,99 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [36
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 680--680
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 980--980
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 680--680
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 980--980
+ [][][][]  
+ []
+
+<../MSSV_Ten_StockPredictionRNN/results/training_loss.png, id=1070, 433.62pt x 289.08pt>
+File: ../MSSV_Ten_StockPredictionRNN/results/training_loss.png Graphic file (type png)
+<use ../MSSV_Ten_StockPredictionRNN/results/training_loss.png>
+Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/training_loss.png  used on input line 980.
+(pdftex.def)             Requested size: 164.30028pt x 109.53394pt.
+<../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png, id=1072, 433.62pt x 289.08pt>
+File: ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png Graphic file (type png)
+<use ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png>
+Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png  used on input line 980.
+(pdftex.def)             Requested size: 164.30028pt x 109.53394pt.
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[37
+
+ <../MSSV_Ten_StockPredictionRNN/results/training_loss.png> <../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png>]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 994--994
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 994--994
+ [][][][]  
+ []
+
+<../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png, id=1102, 505.89pt x 289.08pt>
+File: ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png Graphic file (type png)
+<use ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png>
+Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png  used on input line 994.
+(pdftex.def)             Requested size: 273.83728pt x 156.48021pt.
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[38
+
+ <../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png>]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1000--1000
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1000--1000
+ [][][][]  
+ []
+
+(./CS115.toc)
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[39
+
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1025--1025
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1025--1025
  [][][][]  
  []
 
@@ -2075,7 +2183,127 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
  [][][][]  
  []
 
-[37
+[40
+
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1054--1054
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1054--1054
+ [][][][]  
+ []
+
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[41
+
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1088--1088
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1088--1088
+ [][][][]  
+ []
+
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[42
+
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1101--1101
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1101--1101
+ [][][][]  
+ []
+
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[43
+
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1124--1124
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1124--1124
+ [][][][]  
+ []
+
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[44
+
+]
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1147--1147
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1147--1147
+ [][][][]  
+ []
+
+
+
+
+Overfull \hbox (28.78542pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[45
 
 ]
 \tf@nav=\write6
@@ -2100,18 +2328,18 @@ Package rerunfilecheck Info: File `CS115.out' has not changed.
 (rerunfilecheck)             Checksum: B8156ADD761A6A84CD3D98BDB3D05B35;634.
  ) 
 Here is how much of TeX's memory you used:
- 28213 strings out of 469220
- 554809 string characters out of 5462267
- 945078 words of memory out of 5000000
- 56011 multiletter control sequences out of 15000+600000
- 672252 words of font info for 146 fonts, out of 8000000 for 9000
+ 30089 strings out of 469220
+ 579805 string characters out of 5462267
+ 1306843 words of memory out of 5000000
+ 57847 multiletter control sequences out of 15000+600000
+ 672687 words of font info for 148 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 128i,17n,123p,516b,1024s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0800.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0900.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1000.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnssbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnssi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vntt9.pfb>
-Output written on CS115.pdf (37 pages, 577406 bytes).
+ 128i,17n,123p,516b,1423s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0800.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0900.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1000.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnssbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
+Output written on CS115.pdf (45 pages, 542286 bytes).
 PDF statistics:
- 1230 PDF objects out of 1440 (max. 8388607)
- 1066 compressed objects within 11 object streams
- 78 named destinations out of 1000 (max. 500000)
+ 1447 PDF objects out of 1728 (max. 8388607)
+ 1267 compressed objects within 13 object streams
+ 94 named destinations out of 1000 (max. 500000)
  150 words of extra memory for PDF output out of 10000 (max. 10000000)
 

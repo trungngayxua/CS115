@@ -21,7 +21,16 @@
 \usepackage{enumitem}
 \usepackage{bm}
 \usepackage{graphicx}
-\graphicspath{{./}{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems/}{../MSSV_Ten_StockPredictionRNN/results/}}
+\graphicspath{{./}{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems/}{MSSV_Ten_StockPredictionRNN/results/}{../MSSV_Ten_StockPredictionRNN/results/}}
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    xleftmargin=1ex,
+}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 
@@ -98,7 +107,11 @@
         % \item Thường gặp trong các bài toán machine learning tổng quát.
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.55\linewidth]{template-1_image_page11_1.png}
+        \IfFileExists{template-1_image_page11_1.png}{%
+            \includegraphics[width=0.55\linewidth]{template-1_image_page11_1.png}%
+        }{%
+            \fbox{\parbox{0.75\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page11\_1.png}}%
+        }
     \end{center}
 \end{frame}
 
@@ -108,7 +121,11 @@
         \item Ứng dụng: music generation, image captioning.
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.7\linewidth]{template-1_image_page12_1.png}
+        \IfFileExists{template-1_image_page12_1.png}{%
+            \includegraphics[width=0.7\linewidth]{template-1_image_page12_1.png}%
+        }{%
+            \fbox{\parbox{0.85\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page12\_1.png}}%
+        }
     \end{center}
 \end{frame}
 
@@ -118,7 +135,11 @@
         \item Ví dụ phổ biến: sentiment analysis.
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.7\linewidth]{template-1_image_page13_1.png}
+        \IfFileExists{template-1_image_page13_1.png}{%
+            \includegraphics[width=0.7\linewidth]{template-1_image_page13_1.png}%
+        }{%
+            \fbox{\parbox{0.85\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page13\_1.png}}%
+        }
     \end{center}
 \end{frame}
 
@@ -129,7 +150,11 @@
         \item Số bước khác nhau: độ dài input khác output (ví dụ: machine translation).
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.7\linewidth]{template-1_image_page14_1.png}
+        \IfFileExists{template-1_image_page14_1.png}{%
+            \includegraphics[width=0.7\linewidth]{template-1_image_page14_1.png}%
+        }{%
+            \fbox{\parbox{0.85\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page14\_1.png}}%
+        }
     \end{center}
 \end{frame}
 
@@ -266,6 +291,72 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Đường đạo hàm cho $\bm{o}_t$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Mỗi $\bm{o}_t$ chỉ nối với loss tại cùng thời điểm: $\bm{o}_t \to \ell_t$.
+        \item Không có cộng dồn qua các bước thời gian (chỉ nhân hệ số $\tfrac{1}{T}$).
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node[faded] (x1) {$\bm{x}_{1}$};
+        \node[faded,right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[faded,right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[faded,right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[faded,below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[faded,right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[faded,right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[faded,right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[faded,below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[faded,right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[faded,right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[faded,right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[faded,above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[faded,above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded intra-step edges
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->,faded] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->,faded] (\at) edge node {$\phi_h$} (\htn);
+            \path[->,faded] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+            \path[->,faded] (\zt) edge (\ot);
+        };
+
+        % faded recurrent edges h_{t-1} -> a_t
+        \path[->,faded,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,faded,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+
+        % bias connections (faded)
+        \path[->,faded,dashed,bend left=10] (bh) edge (a1);
+        \path[->,faded,dashed,bend left=8] (bh) edge (a2);
+        \path[->,faded,dashed,bend right=10] (bh) edge (a3);
+        \path[->,faded,dashed,bend left=10] (bq) edge (z1);
+        \path[->,faded,dashed] (bq) edge (z2);
+        \path[->,faded,dashed,bend right=10] (bq) edge (z3);
+
+        % highlighted path for o_t
+        \foreach \ot/\lt in {o1/l1, o2/l2, o3/l3}{
+            \path[->,very thick,red!75!black] (\ot) edge (\lt);
+        };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \begin{frame}{Gradient theo output đầu ra $\bm{o}_t$}
     \small
     \begin{itemize}[leftmargin=*]
@@ -277,6 +368,76 @@
             \in \mathbb{R}^q.
         \]
     \end{itemize}
+\end{frame}
+
+\begin{frame}{Đường đạo hàm cho $\bm{b}_q$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Gradient theo $\bm{b}_q$ đi dọc nhánh $\bm{b}_q \to \bm{z}_t \to \bm{o}_t \to \ell_t$ tại từng bước thời gian.
+        \item Vì $\bm{b}_q$ được chia sẻ, các đóng góp này được cộng lại rồi chia $T$.
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node[faded] (x1) {$\bm{x}_{1}$};
+        \node[faded,right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[faded,right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[faded,below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[faded,right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[faded,right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[faded,below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[faded,right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[faded,right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[faded,above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded intra-step edges
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->,faded] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->,faded] (\at) edge node {$\phi_h$} (\htn);
+            \path[->,faded] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+        };
+
+        % faded recurrent edges h_{t-1} -> a_t
+        \path[->,faded,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,faded,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+
+        % faded loss edges
+        \foreach \ot/\lt in {o1/l1, o2/l2, o3/l3}{
+            \path[->,faded] (\ot) edge (\lt);
+        };
+
+        % bias connections for b_h (faded)
+        \path[->,faded,dashed,bend left=10] (bh) edge (a1);
+        \path[->,faded,dashed,bend left=8] (bh) edge (a2);
+        \path[->,faded,dashed,bend right=10] (bh) edge (a3);
+
+        % highlighted path for b_q
+        \foreach \zt/\ot/\lt in {z1/o1/l1, z2/o2/l2, z3/o3/l3}{
+            \path[->,very thick,red!75!black] (bq) edge[bend left=10] (\zt);
+            \path[->,very thick,red!75!black] (\zt) edge (\ot);
+            \path[->,very thick,red!75!black] (\ot) edge (\lt);
+        };
+
+    \end{tikzpicture}
+    \end{center}
 \end{frame}
 
 \begin{frame}{Gradient theo bias đầu ra $\bm{b}_q$}
@@ -301,6 +462,78 @@
     \end{align*}
 \end{frame}
 
+\begin{frame}{Đường đạo hàm cho $\bm{W}_{qh}$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Gradient đi theo nhánh $\bm{W}_{qh} \to \bm{z}_t \to \bm{o}_t \to \ell_t$, được nhân thêm $\bm{h}_t^{\top}$ tại mỗi bước.
+        \item Vì $\bm{W}_{qh}$ dùng chung, cộng các đóng góp qua thời gian rồi chia $T$.
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node[faded] (x1) {$\bm{x}_{1}$};
+        \node[faded,right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[faded,below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[faded,right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[faded,below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[faded,right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[faded,above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[faded,above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded intra-step edges (trừ nhánh cần highlight)
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->,faded] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->,faded] (\at) edge node {$\phi_h$} (\htn);
+        };
+
+        % faded recurrent edges h_{t-1} -> a_t
+        \path[->,faded,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,faded,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+
+        % faded loss edges
+        \foreach \ot/\lt in {o1/l1, o2/l2, o3/l3}{
+            \path[->,faded] (\ot) edge (\lt);
+        };
+
+        % bias connections (faded)
+        \path[->,faded,dashed,bend left=10] (bh) edge (a1);
+        \path[->,faded,dashed,bend left=8] (bh) edge (a2);
+        \path[->,faded,dashed,bend right=10] (bh) edge (a3);
+        \path[->,faded,dashed,bend left=10] (bq) edge (z1);
+        \path[->,faded,dashed] (bq) edge (z2);
+        \path[->,faded,dashed,bend right=10] (bq) edge (z3);
+
+        % highlighted path for W_{qh}
+        \foreach \htn/\zt/\ot/\lt in {h1/z1/o1/l1, h2/z2/o2/l2, h3/z3/o3/l3}{
+            \path[->,very thick,red!75!black] (\htn) edge node[above] {$\bm{W}_{qh}$} (\zt);
+            \path[->,very thick,red!75!black] (\zt) edge (\ot);
+            \path[->,very thick,red!75!black] (\ot) edge (\lt);
+        };
+
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \begin{frame}{Gradient theo trọng số $\bm{W}_{qh}$}
     \small
     Sử dụng $\bm{z}_t = \bm{W}_{qh}\bm{h}_t + \bm{b}_q$ và áp dụng chain rule từng bước:
@@ -320,6 +553,83 @@
         \right)
         \bm{h}_t^{\top}
     \end{align*}
+\end{frame}
+
+\begin{frame}{Đường đạo hàm cho $\bm{h}_t$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Hai nhánh: (1) qua output hiện tại $\bm{h}_t \to \bm{z}_t \to \bm{o}_t \to \ell_t$; (2) hồi quy về tương lai $\bm{h}_t \to \bm{a}_{t+1} \to \bm{h}_{t+1} \to \cdots$.
+        \item Tổng hợp cả hai nhánh (nhánh tương lai gói trong $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_{t+1}}$).
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node[faded] (x1) {$\bm{x}_{1}$};
+        \node[faded,right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[faded,below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[faded,right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[faded,below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[faded,right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[faded,above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[faded,above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded intra-step edges (giữ cấu trúc, chỉ highlight nhánh cần thiết)
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->,faded] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->,faded] (\at) edge node {$\phi_h$} (\htn);
+            \path[->,faded] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+            \path[->,faded] (\zt) edge (\ot);
+        };
+
+        % faded bias connections
+        \path[->,faded,dashed,bend left=10] (bh) edge (a1);
+        \path[->,faded,dashed,bend left=8] (bh) edge (a2);
+        \path[->,faded,dashed,bend right=10] (bh) edge (a3);
+        \path[->,faded,dashed,bend left=10] (bq) edge (z1);
+        \path[->,faded,dashed] (bq) edge (z2);
+        \path[->,faded,dashed,bend right=10] (bq) edge (z3);
+
+        % highlighted W_{qh} branches (mọi timestep)
+        \foreach \htn/\zt/\ot/\lt in {h1/z1/o1/l1, h2/z2/o2/l2, h3/z3/o3/l3}{
+            \path[->,very thick,red!75!black] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+            \path[->,faded] (\zt) edge (\ot);
+            \path[->,faded] (\ot) edge (\lt);
+        };
+
+        % highlighted recurrent branches forward (t -> t+1)
+        \path[->,very thick,red!75!black,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,very thick,red!75!black,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+
+        % highlighted phi_h (trừ bước đầu)
+        \path[->,very thick,red!75!black] (a2) edge node {$\phi_h$} (h2);
+        \path[->,very thick,red!75!black] (a3) edge node {$\phi_h$} (h3);
+
+        % faded future loss path (ẩn trong $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_{t+1}}$)
+        \path[->,faded] (h3) edge (z3);
+        \path[->,faded] (z3) edge (o3);
+        \path[->,faded] (o3) edge (l3);
+    \end{tikzpicture}
+    \end{center}
 \end{frame}
 
 \begin{frame}{Gradient theo hidden state $\bm{h}_t$}
@@ -354,6 +664,72 @@
     % với điều kiện biên $\dfrac{\partial \mathcal{L}}{\partial \bm{h}_{T+1}} = \bm{0}$ (không còn bước tương lai).
 \end{frame}
 
+\begin{frame}{Đường đạo hàm cho $\bm{W}_{hx}$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Chuỗi: $\bm{W}_{hx} \to \bm{a}_t \to \bm{h}_t \to \bm{z}_t \to \bm{o}_t \to \ell_t$ tại mỗi timestep.
+        \item Cộng các đóng góp qua thời gian (do chia sẻ tham số) rồi lấy trung bình.
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node (x1) {$\bm{x}_{1}$};
+        \node[right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[faded,above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[faded,above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded recurrent edges
+        \path[->,faded,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,faded,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+
+        % faded bias connections
+        \path[->,faded,dashed,bend left=10] (bh) edge (a1);
+        \path[->,faded,dashed,bend left=8] (bh) edge (a2);
+        \path[->,faded,dashed,bend right=10] (bh) edge (a3);
+        \path[->,faded,dashed,bend left=10] (bq) edge (z1);
+        \path[->,faded,dashed] (bq) edge (z2);
+        \path[->,faded,dashed,bend right=10] (bq) edge (z3);
+
+        % highlighted chain per timestep (edges xuất hiện trong công thức)
+        \foreach \xt/\at/\htn in {x1/a1/h1, x2/a2/h2, x3/a3/h3}{
+            \path[->,very thick,red!75!black] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->,very thick,red!75!black] (\at) edge node {$\phi_h$} (\htn);
+        };
+
+        % faded rest of chain to loss
+        \foreach \htn/\zt/\ot/\lt in {h1/z1/o1/l1, h2/z2/o2/l2, h3/z3/o3/l3}{
+            \path[->,faded] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+            \path[->,faded] (\zt) edge (\ot);
+            \path[->,faded] (\ot) edge (\lt);
+        };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \begin{frame}{Gradient theo $\bm{W}_{hx}$}
     \small
     Nhắc lại tiền kích hoạt \& hidden:
@@ -377,6 +753,75 @@
     vì $\partial \bm{a}_t / \partial \bm{W}_{hx} = \bm{x}_t$. Lưu ý $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$ đã bao gồm hệ số $1/T$ và các đóng góp hồi quy phía sau.
 \end{frame}
 
+\begin{frame}{Đường đạo hàm cho $\bm{W}_{hh}$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Chuỗi: $\bm{h}_{t-1} \xrightarrow{\bm{W}_{hh}} \bm{a}_t \to \bm{h}_t \to \bm{z}_t \to \bm{o}_t \to \ell_t$.
+        \item Cộng dồn qua các timestep có kết nối hồi quy, rồi chia trung bình.
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node[faded] (x1) {$\bm{x}_{1}$};
+        \node[faded,right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[faded,right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[faded,right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[faded,above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[faded,below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[faded,below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[faded,above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[faded,above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded intra-step edges not in highlight
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->,faded] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->,faded] (\at) edge node {$\phi_h$} (\htn);
+        };
+
+        % faded bias connections
+        \path[->,faded,dashed,bend left=10] (bh) edge (a1);
+        \path[->,faded,dashed,bend left=8] (bh) edge (a2);
+        \path[->,faded,dashed,bend right=10] (bh) edge (a3);
+        \path[->,faded,dashed,bend left=10] (bq) edge (z1);
+        \path[->,faded,dashed] (bq) edge (z2);
+        \path[->,faded,dashed,bend right=10] (bq) edge (z3);
+
+        % highlighted chain for t=2 and t=3 (chỉ nhánh trong công thức)
+        \path[->,very thick,red!75!black,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,very thick,red!75!black] (a2) edge node {$\phi_h$} (h2);
+
+        \path[->,very thick,red!75!black,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+        \path[->,very thick,red!75!black] (a3) edge node {$\phi_h$} (h3);
+
+        % faded rest of chain to loss
+        \foreach \htn/\zt/\ot/\lt in {h2/z2/o2/l2, h3/z3/o3/l3}{
+            \path[->,faded] (\htn) edge (\zt);
+            \path[->,faded] (\zt) edge (\ot);
+            \path[->,faded] (\ot) edge (\lt);
+        };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \begin{frame}{Gradient theo $\bm{W}_{hh}$}
     \small
     Với $\bm{a}_t = \bm{W}_{hx}\bm{x}_t + \bm{W}_{hh}\bm{h}_{t-1} + \bm{b}_h$ suy ra $\partial \bm{a}_t / \partial \bm{W}_{hh} = \bm{h}_{t-1}$.
@@ -391,6 +836,73 @@
         \bm{h}_{t-1}^{\top},
     \end{align*}
     vì $\partial \bm{a}_t / \partial \bm{W}_{hh} = \bm{h}_{t-1}$. Hệ số $1/T$ và ảnh hưởng từ các bước tương lai đã nằm trong $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$.
+\end{frame}
+
+\begin{frame}{Đường đạo hàm cho $\bm{b}_h$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Nhánh: $\bm{b}_h \dashrightarrow \bm{a}_t \to \bm{h}_t \to \bm{z}_t \to \bm{o}_t \to \ell_t$ tại mỗi $t$.
+        \item Bias chia sẻ nên các đóng góp được cộng lại rồi chia $T$.
+    \end{itemize}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.6cm, auto,
+        every node/.style={font=\scriptsize},
+        faded/.style={opacity=0.25}]
+        % column 1 (t=1)
+        \node[faded] (x1) {$\bm{x}_{1}$};
+        \node[right=1.6cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[right=1.6cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[right=1.6cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.6cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.8cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[faded,below=1.6cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[right=1.6cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[right=1.6cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.6cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.6cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.8cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[faded,below=1.6cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[right=1.6cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[right=1.6cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.6cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.6cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.8cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[above=1cm of x1] (bh) {$\bm{b}_h$};
+        \node[faded,above=1cm of z2] (bq) {$\bm{b}_q$};
+
+        % faded connections not in highlight
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->,faded] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+        };
+        \path[->,faded,bend left=12] (h1) edge node {$\bm{W}_{hh}$} (a2);
+        \path[->,faded,bend left=12] (h2) edge node {$\bm{W}_{hh}$} (a3);
+        \path[->,faded,dashed,bend left=10] (bq) edge (z1);
+        \path[->,faded,dashed] (bq) edge (z2);
+        \path[->,faded,dashed,bend right=10] (bq) edge (z3);
+
+        % highlighted bias branch
+        \path[->,very thick,red!75!black,dashed,bend left=10] (bh) edge (a1);
+        \path[->,very thick,red!75!black,dashed,bend left=8] (bh) edge (a2);
+        \path[->,very thick,red!75!black,dashed,bend right=10] (bh) edge (a3);
+
+        \foreach \at/\htn in {a1/h1, a2/h2, a3/h3}{
+            \path[->,very thick,red!75!black] (\at) edge node {$\phi_h$} (\htn);
+        };
+
+        % faded rest of chain to loss
+        \foreach \htn/\zt/\ot/\lt in {h1/z1/o1/l1, h2/z2/o2/l2, h3/z3/o3/l3}{
+            \path[->,faded] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+            \path[->,faded] (\zt) edge (\ot);
+            \path[->,faded] (\ot) edge (\lt);
+        };
+    \end{tikzpicture}
+    \end{center}
 \end{frame}
 
 \begin{frame}{Gradient theo bias $\bm{b}_h$}
@@ -424,103 +936,60 @@
     Điều kiện biên: \(\frac{\partial \mathcal{L}}{\partial \bm{h}_{T+1}} = \bm{0}\).
 \end{frame}
 
-\begin{frame}[fragile]{Demo: Kiến trúc RNN \& dữ liệu}
-    \textbf{Bài toán}
+\begin{frame}{Demo: RNN dự đoán giá cổ phiếu}
     \begin{itemize}
-        \item Dự đoán giá đóng cửa cổ phiếu (Close price) dựa trên \(N\) ngày trước (\textit{lookback} \(= 20\)).
-        \item Bài toán time-series regression (sequence \(\rightarrow\) one).
+        \item Bài toán many-to-one: mỗi cửa sổ 20 điểm giá $\to$ dự báo giá tiếp theo (1 giá trị).
+        \item Kiến trúc: 1 input, 16 hidden (tanh), 1 output tuyến tính.
+        \item Loss huấn luyện: MSE trên output cuối chuỗi; chuẩn hóa min-max fit trên train, áp dụng cho test.
+        \item Cấu hình: 300 epochs, learning rate 0.01, gradient clipping $\tau = 5$.
+        \item Kết quả test: RMSE $\approx 1.45$, MAE $\approx 1.19$.
     \end{itemize}
-    \medskip
-    \textbf{Tiền xử lý dữ liệu}
-    \begin{itemize}
-        \item Min--Max Scaling đưa giá về \([0,1]\):
-        \[
-            x_{\text{norm}} = \frac{x - x_{\min}}{x_{\max} - x_{\min}}.
-        \]
-        \item Tạo sliding window:
-        \begin{itemize}
-            \item Input: \([x_{t-19}, \ldots, x_t]\).
-            \item Target: \(x_{t+1}\).
-        \end{itemize}
-    \end{itemize}
-    \medskip
-    \textbf{Kiến trúc Traditional RNN}
-    \begin{itemize}
-        \item Input size: 1 (giá), Hidden size: \(H\), Output size: 1 (giá dự đoán).
-        \item Không dùng LSTM / GRU, forward thủ công.
-    \end{itemize}
-    \vspace{0.3em}
-    \scriptsize
-\begin{verbatim}
-scaled = MinMaxScaler().fit_transform(prices)
-X, y = create_sequences(scaled, lookback=20)
-x_win, y_next = X[0], y[0]  # window [x_{t-19},...,x_t], target x_{t+1}
-\end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile]{Demo: Forward, loss \& huấn luyện}
-    \textbf{Forward pass (mỗi timestep)}
-    \[
-        h_t = \tanh\!\left(x_t W_{xh} + h_{t-1} W_{hh} + b_h\right), \qquad
-        o_t = h_t W_{qh} + b_q.
-    \]
-    \begin{itemize}
-        \item Hidden activation: \(\tanh\).
-        \item Output activation: tuyến tính (không activation).
-    \end{itemize}
-    \medskip
-    \textbf{Loss function}
-    \begin{itemize}
-        \item Mean Squared Error (MSE):
-    \end{itemize}
-    \[
-        \mathcal{L} = \frac{1}{2}\left(o_T - y\right)^2.
-    \]
-    \medskip
-    \textbf{Huấn luyện}
-    \begin{itemize}
-        \item Backpropagation Through Time (BPTT).
-        \item Gradient clipping để tránh exploding gradient:
-        \[
-            g \leftarrow \frac{g}{\max\!\left(1, \|g\| / \tau\right)}.
-        \]
-        \item Cập nhật tham số bằng Gradient Descent.
-    \end{itemize}
-    \vspace{0.3em}
-    \scriptsize
-\begin{verbatim}
-h[t+1] = np.tanh(x[t]@W_xh + h[t]@W_hh + b_h)
-o[t]   = h[t+1]@W_qh + b_q
-grads = model.backward(y_true=target, y_pred=outputs)
-clip = clip_gradients(grads, tau)[0]; apply_gradients(model.parameters(), clip, lr)
-\end{verbatim}
+\begin{frame}[fragile]{Code huấn luyện RNN (1/2)}
+    \lstinputlisting[language=Python, firstline=19, lastline=36]{../MSSV_Ten_StockPredictionRNN/src/train.py}
 \end{frame}
 
-\begin{frame}{Demo: Loss và độ lớn gradient (có clipping)}
-    \begin{columns}[T]
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \includegraphics[width=\linewidth]{loss_curve_clipped.png}
-            \end{center}
-            \vspace{-0.5em}
-            \small Loss giảm ổn định sau khi áp dụng clipping.
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \includegraphics[width=\linewidth]{gradients_norm.png}
-            \end{center}
-            \vspace{-0.5em}
-            \small Chuẩn gradient được giữ dưới ngưỡng \(\tau\), tránh exploding.
-        \end{column}
-    \end{columns}
+\begin{frame}[fragile]{Code huấn luyện RNN (2/2)}
+    \lstinputlisting[language=Python, firstline=37, lastline=46]{../MSSV_Ten_StockPredictionRNN/src/train.py}
 \end{frame}
 
-\begin{frame}{Demo: Dự đoán giá cổ phiếu}
+\begin{frame}{Training loss và norm gradient (đã clipping)}
+    \begin{center}
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \IfFileExists{../MSSV_Ten_StockPredictionRNN/results/training_loss.png}{%
+            \includegraphics[width=\linewidth]{../MSSV_Ten_StockPredictionRNN/results/training_loss.png}%
+        }{%
+            \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: training\_loss.png}}%
+        }
+        \\[0.4em]
+        \scriptsize Loss giảm đều trong 300 epochs.
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \IfFileExists{../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png}{%
+            \includegraphics[width=\linewidth]{../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png}%
+        }{%
+            \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: gradient\_norm\_log.png}}%
+        }
+        \\[0.4em]
+        \scriptsize Clipping giữ gradient norm gần ngưỡng $\tau = 5$ và tránh exploding.
+    \end{minipage}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Dự báo trên tập test}
     \begin{itemize}
-        \item So sánh giá thật và giá dự đoán sau khi huấn luyện với Gradient Clipping.
+        \item Dùng tham số đã huấn luyện và scaler của train set để dự báo giá test.
+        \item Sai số: RMSE $\approx 1.45$, MAE $\approx 1.19$.
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.85\linewidth]{prediction_chart.png}
+        \IfFileExists{../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png}{%
+            \includegraphics[width=0.8\linewidth]{../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png}%
+        }{%
+            \fbox{\parbox{0.8\linewidth}{\centering \scriptsize Missing image: test\_prediction\_chart.png}}%
+        }
     \end{center}
 \end{frame}
 
@@ -654,6 +1123,7 @@ trong đó $g$ là gradient và $\tau$ là ngưỡng.
 
 \end{frame}
 
+\medskip
 \begin{frame}{Giải pháp 2: Long Short-Term Memory (LSTM)}
 
 LSTM thay đổi kiến trúc RNN bằng cách:
@@ -662,7 +1132,6 @@ LSTM thay đổi kiến trúc RNN bằng cách:
 \item Tránh nhân lặp trực tiếp bởi cùng một ma trận.
 \end{itemize}
 
-\medskip
 
 Trạng thái cell $c_t$ được cập nhật dưới dạng:
 \begin{equation}

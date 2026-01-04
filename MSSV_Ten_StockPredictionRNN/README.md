@@ -1,35 +1,25 @@
-# Traditional RNN Stock Prediction (BPTT + Gradient Clipping)
+# Stock Price Prediction with Traditional RNN (Hand-coded BPTT)
 
-Demo hiện thực kiến trúc **Traditional RNN** thủ công (không dùng LSTM/GRU) đúng theo công thức trong CS115.tex, kèm cơ chế **Gradient Clipping** để tránh Exploding Gradients.
+Thư mục này chứa demo RNN truyền thống tự code forward/backward, tách biệt train/test. Mặc định dùng dữ liệu synthetic (có thể thay bằng dữ liệu thực của bạn).
 
 ## Cấu trúc
-```
-MSSV_Ten_StockPredictionRNN/
-├── data/stock_price.csv          # Dữ liệu giá (sinh mẫu nếu thiếu)
-├── parameters/                   # Trọng số & bias sau train (weights.npy, biases.npy)
-├── results/                      # Biểu đồ: loss, gradient norm, prediction
-└── src/
-    ├── rnn_core.py               # Forward + BPTT thủ công (TraditionalRNN)
-    ├── optimizer.py              # clip_gradients() + apply_gradients()
-    ├── utils.py                  # Load data, MinMaxScaler, tạo cửa sổ chuỗi
-    └── train.py                  # Vòng lặp huấn luyện, lưu kết quả
-```
+- `data/train_data.csv`: dùng để fit scaler + huấn luyện (BPTT + clipping).
+- `data/test_data.csv`: độc lập để chấm điểm, **không** dùng để tính gradient.
+- `parameters/`: `rnn_weights.npy`, `rnn_biases.npy`, `scaler_params.pkl` (tạo sau khi train).
+- `results/`: biểu đồ `training_loss.png`, `gradient_norm_log.png`, `test_prediction_chart.png`, file `metrics.txt`.
+- `src/`: mã nguồn `rnn_core.py`, `optimizer.py`, `utils.py`, `train.py`, `evaluate.py`.
 
-## Cách chạy nhanh
+## Cách chạy
+1) Huấn luyện trên train set, lưu model và scaler:
 ```bash
-cd MSSV_Ten_StockPredictionRNN/src
-python3 train.py --epochs 50 --lr 0.01 --hidden-size 16 --lookback 20 --tau 0.12
+python src/train.py --epochs 300 --lookback 20 --hidden-size 16 --lr 0.01 --tau 5.0
 ```
-- Nếu `data/stock_price.csv` chưa có, script sẽ tự sinh dữ liệu mẫu.
-- Kết quả lưu tại:
-  - `parameters/weights.npy` (W_xh, W_hh, W_qh)
-  - `parameters/biases.npy` (b_h, b_q)
-  - `results/loss_curve_clipped.png` (loss vs epoch)
-  - `results/gradients_norm.png` (L2 norm trước/sau clipping)
-  - `results/prediction_chart.png` (Actual vs Predicted trên tập test)
+2) Kiểm thử trên test set (chỉ forward, không update trọng số):
+```bash
+python src/evaluate.py --lookback 20
+```
 
-## Liên hệ với slide CS115
-- Forward: `h_t = tanh(x_t W_xh + h_{t-1} W_hh + b_h)`, `o_t = h_t W_qh + b_q` (rnn_core.py).
-- Backward: BPTT cộng dồn gradient qua thời gian để cập nhật `W_hx, W_hh, W_qh`, bias (rnn_core.py::backward).
-- Gradient Clipping: `g <- g / max(1, ||g|| / tau)` để kìm exploding gradient (optimizer.py).
-- Huấn luyện: Forward → tính MSE → backward → clip → update (train.py).
+## Ghi chú
+- Có sẵn hàm sinh dữ liệu synthetic nếu thiếu file CSV; thay `data/train_data.csv` và `data/test_data.csv` bằng dữ liệu thật của bạn (cột `Date,Close`).
+- Scaler trên test **bắt buộc** dùng min/max đã fit từ train (được lưu trong `scaler_params.pkl`).
+- Hình ảnh kết quả sẽ được LaTeX chèn từ `results/` (đã khai báo trong `graphicspath` của slide).

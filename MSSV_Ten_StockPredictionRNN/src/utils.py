@@ -1,89 +1,148 @@
-"""
-Utility helpers for data loading, preprocessing, and batching.
-"""
-from __future__ import annotations
-
+import csv
+import math
+import pickle
+from datetime import datetime, timedelta
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
 
 class MinMaxScaler:
-    """Simple Min-Max scaler (fit/transform/inverse_transform) using numpy."""
-
-    def __init__(self) -> None:
+    def __init__(self):
         self.min_ = None
         self.max_ = None
 
     def fit(self, data: np.ndarray) -> None:
-        self.min_ = data.min(axis=0, keepdims=True)
-        self.max_ = data.max(axis=0, keepdims=True)
+        self.min_ = np.min(data, axis=0)
+        self.max_ = np.max(data, axis=0)
 
     def transform(self, data: np.ndarray) -> np.ndarray:
-        if self.min_ is None or self.max_ is None:
-            raise RuntimeError("Scaler not fitted yet.")
-        denom = np.where((self.max_ - self.min_) == 0, 1.0, self.max_ - self.min_)
-        return (data - self.min_) / denom
+        eps = 1e-8
+        return (data - self.min_) / (self.max_ - self.min_ + eps)
 
     def inverse_transform(self, data: np.ndarray) -> np.ndarray:
-        denom = np.where((self.max_ - self.min_) == 0, 1.0, self.max_ - self.min_)
-        return data * denom + self.min_
+        eps = 1e-8
+        return data * (self.max_ - self.min_ + eps) + self.min_
+
+    def load_params(self, min_vals: np.ndarray, max_vals: np.ndarray) -> None:
+        self.min_ = np.array(min_vals)
+        self.max_ = np.array(max_vals)
+
+    def get_params(self):
+        return {"min_": self.min_, "max_": self.max_}
 
 
-def maybe_generate_synthetic_csv(data_path: Path, num_points: int = 250) -> None:
-    """
-    Generate a lightweight synthetic price series if stock_price.csv is missing.
-    The series has a mild upward trend and weekly seasonality to mimic real prices.
-    """
-    if data_path.exists():
+def ensure_demo_data(train_path: Path, test_path: Path, seed: int = 0, force_regen: bool = False) -> None:
+    """Tao du lieu synthetic. Mac dinh khong ghi de neu file da ton tai."""
+    rng = np.random.default_rng(seed)
+    if train_path.exists() and test_path.exists() and not force_regen:
         return
 
-    days = np.arange(num_points)
-    trend = 50 + 0.1 * days
-    seasonality = 1.8 * np.sin(2 * np.pi * days / 7)
-    noise = np.random.normal(0, 1.2, size=num_points)
-    close = trend + seasonality + noise
+    train_path.parent.mkdir(parents=True, exist_ok=True)
+    test_path.parent.mkdir(parents=True, exist_ok=True)
+    total_points = 420
+    train_points = 320
+    start_price = 100.0
+    t = np.arange(total_points)
+    seasonal = 3.0 * np.sin(t / 12) + 1.5 * np.sin(t / 25 + 0.5)
+    cycle = 0.8 * np.sin(t / 6 + 1.2)
+    drift = 0.02 * np.sin(t / 90)
+    noise = rng.normal(scale=1.0, size=total_points)
+    prices = start_price + seasonal + cycle + drift + noise
 
-    open_price = close + np.random.normal(0, 0.7, size=num_points)
-    high = np.maximum(open_price, close) + np.abs(np.random.normal(0, 0.4, size=num_points))
-    low = np.minimum(open_price, close) - np.abs(np.random.normal(0, 0.4, size=num_points))
-    volume = np.random.randint(800_000, 1_800_000, size=num_points)
+    start_date = datetime(2010, 1, 1)
 
-    dates = pd.date_range(end=pd.Timestamp.today().normalize(), periods=num_points)
-    df = pd.DataFrame(
-        {
-            "Date": dates.strftime("%Y-%m-%d"),
-            "Open": open_price.round(2),
-            "High": high.round(2),
-            "Low": low.round(2),
-            "Close": close.round(2),
-            "Volume": volume,
-        }
-    )
-    data_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(data_path, index=False)
-    print(f"[info] Generated synthetic dataset at {data_path}")
+    def write_csv(path: Path, values: np.ndarray, offset: int) -> None:
+        with open(path, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Date", "Close"])
+            for i, price in enumerate(values):
+                date = start_date + timedelta(days=offset + i)
+                writer.writerow([date.strftime("%Y-%m-%d"), f"{price:.4f}"])
 
-
-def load_stock_data(data_path: Path) -> pd.DataFrame:
-    maybe_generate_synthetic_csv(data_path)
-    df = pd.read_csv(data_path)
-    if "Date" in df.columns:
-        df["Date"] = pd.to_datetime(df["Date"])
-        df = df.sort_values("Date")
-    return df.reset_index(drop=True)
+    write_csv(train_path, prices[:train_points], 0)
+    write_csv(test_path, prices[train_points:], train_points)
 
 
-def create_sequences(series: np.ndarray, lookback: int) -> tuple[np.ndarray, np.ndarray]:
-    """
-    Build (X, y) pairs where X is a window of length `lookback` and y is the next value.
-    """
+def load_stock_data(path: Path) -> np.ndarray:
+    """Doc CSV voi cot Date,Close. Tra ve mang (N,1) gia da sort theo ngay."""
+    records = []
+    with open(path, "r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            date_str = row.get("Date", "")
+            try:
+                dt = datetime.fromisoformat(date_str)
+            except ValueError:
+                dt = date_str
+            close = float(row["Close"])
+            records.append((dt, close))
+    records.sort(key=lambda r: r[0])
+    values = np.array([r[1] for r in records], dtype=float).reshape(-1, 1)
+    return values
+
+
+def create_sequences(series: np.ndarray, lookback: int):
+    """Tao (X, y) cho sliding window. X: (n, lookback, 1), y: (n, 1)."""
     X, y = [], []
-    for i in range(lookback, len(series)):
-        X.append(series[i - lookback : i])
-        y.append(series[i])
-    X = np.array(X)
-    y = np.array(y)
-    return X, y
+    for i in range(len(series) - lookback):
+        X.append(series[i : i + lookback])
+        y.append(series[i + lookback])
+    return np.array(X), np.array(y)
 
+
+def plot_loss_curve(losses, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.figure(figsize=(6, 4))
+    plt.plot(losses, label="Train loss")
+    plt.xlabel("Epoch")
+    plt.ylabel("MSE loss")
+    plt.title("Training loss")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
+
+
+def plot_gradients(raw_norms, clipped_norms, tau: float, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.figure(figsize=(6, 4))
+    plt.plot(raw_norms, label="Raw grad norm")
+    plt.plot(clipped_norms, label="Clipped grad norm")
+    plt.axhline(tau, color="red", linestyle="--", label=f"tau={tau}")
+    plt.xlabel("Epoch")
+    plt.ylabel("Gradient L2 norm")
+    plt.title("Gradient clipping log")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
+
+
+def plot_predictions(targets, preds, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.figure(figsize=(7, 4))
+    plt.plot(targets, label="Actual")
+    plt.plot(preds, label="Predicted")
+    plt.xlabel("Timestep")
+    plt.ylabel("Close price")
+    plt.title("Test prediction vs actual")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
+
+
+def compute_metrics(targets: np.ndarray, preds: np.ndarray):
+    mse = np.mean((targets - preds) ** 2)
+    rmse = math.sqrt(mse)
+    mae = np.mean(np.abs(targets - preds))
+    return rmse, mae
+
+
+def save_metrics(rmse: float, mae: float, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w") as f:
+        f.write(f"RMSE: {rmse:.6f}\n")
+        f.write(f"MAE: {mae:.6f}\n")
