@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  5 JAN 2026 02:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  5 JAN 2026 02:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1970,12 +1970,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [33
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 947--947
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 967--967
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 947--947
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 967--967
  [][][][]  
  []
 
@@ -1994,24 +1994,24 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [34
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 949--949
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 969--969
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 949--949
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 969--969
  [][][][]  
  []
 
 \openout4 = `CS115.vrb'.
 
 
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 951--951
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 971--971
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 951--951
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 971--971
  [][][][]  
  []
 
@@ -2039,24 +2039,24 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [35
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 953--953
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 973--973
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 953--953
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 973--973
  [][][][]  
  []
 
 \openout4 = `CS115.vrb'.
 
 
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 955--955
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 975--975
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 955--955
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 975--975
  [][][][]  
  []
 
@@ -2075,24 +2075,24 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [36
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 980--980
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1000--1000
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 980--980
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1000--1000
  [][][][]  
  []
 
 <../MSSV_Ten_StockPredictionRNN/results/training_loss.png, id=1070, 433.62pt x 289.08pt>
 File: ../MSSV_Ten_StockPredictionRNN/results/training_loss.png Graphic file (type png)
 <use ../MSSV_Ten_StockPredictionRNN/results/training_loss.png>
-Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/training_loss.png  used on input line 980.
+Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/training_loss.png  used on input line 1000.
 (pdftex.def)             Requested size: 164.30028pt x 109.53394pt.
 <../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png, id=1072, 433.62pt x 289.08pt>
 File: ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png Graphic file (type png)
 <use ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png>
-Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png  used on input line 980.
+Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png  used on input line 1000.
 (pdftex.def)             Requested size: 164.30028pt x 109.53394pt.
 
 
@@ -2109,19 +2109,19 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [37
 
  <../MSSV_Ten_StockPredictionRNN/results/training_loss.png> <../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 994--994
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1014--1014
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 994--994
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1014--1014
  [][][][]  
  []
 
 <../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png, id=1102, 505.89pt x 289.08pt>
 File: ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png Graphic file (type png)
 <use ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png>
-Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png  used on input line 994.
+Package pdftex.def Info: ../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png  used on input line 1014.
 (pdftex.def)             Requested size: 273.83728pt x 156.48021pt.
 
 
@@ -2138,12 +2138,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [38
 
  <../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png>]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1000--1000
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1020--1020
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1000--1000
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1020--1020
  [][][][]  
  []
 
@@ -2162,12 +2162,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [39
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1025--1025
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1045--1045
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1025--1025
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1045--1045
  [][][][]  
  []
 
@@ -2186,12 +2186,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [40
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1054--1054
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1074--1074
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1054--1054
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1074--1074
  [][][][]  
  []
 
@@ -2210,12 +2210,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [41
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1088--1088
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1108--1108
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1088--1088
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1108--1108
  [][][][]  
  []
 
@@ -2234,12 +2234,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [42
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1101--1101
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1121--1121
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1101--1101
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1121--1121
  [][][][]  
  []
 
@@ -2258,12 +2258,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [43
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1124--1124
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1144--1144
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1124--1124
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1144--1144
  [][][][]  
  []
 
@@ -2282,12 +2282,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [44
 
 ]
-Overfull \hbox (28.78542pt too wide) in paragraph at lines 1147--1147
+Overfull \hbox (28.78542pt too wide) in paragraph at lines 1167--1167
  [][]  
  []
 
 
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1147--1147
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1167--1167
  [][][][]  
  []
 
@@ -2328,15 +2328,15 @@ Package rerunfilecheck Info: File `CS115.out' has not changed.
 (rerunfilecheck)             Checksum: B8156ADD761A6A84CD3D98BDB3D05B35;634.
  ) 
 Here is how much of TeX's memory you used:
- 30089 strings out of 469220
- 579805 string characters out of 5462267
- 1306843 words of memory out of 5000000
- 57847 multiletter control sequences out of 15000+600000
+ 30097 strings out of 469220
+ 580045 string characters out of 5462267
+ 1308124 words of memory out of 5000000
+ 57855 multiletter control sequences out of 15000+600000
  672687 words of font info for 148 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  128i,17n,123p,516b,1423s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0800.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0900.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1000.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnssbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on CS115.pdf (45 pages, 542286 bytes).
+Output written on CS115.pdf (45 pages, 543729 bytes).
 PDF statistics:
  1447 PDF objects out of 1728 (max. 8388607)
  1267 compressed objects within 13 object streams

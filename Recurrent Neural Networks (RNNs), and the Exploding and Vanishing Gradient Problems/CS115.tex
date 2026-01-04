@@ -937,13 +937,33 @@
 \end{frame}
 
 \begin{frame}{Demo: RNN dự đoán giá cổ phiếu}
-    \begin{itemize}
-        \item Bài toán many-to-one: mỗi cửa sổ 20 điểm giá $\to$ dự báo giá tiếp theo (1 giá trị).
-        \item Kiến trúc: 1 input, 16 hidden (tanh), 1 output tuyến tính.
-        \item Loss huấn luyện: MSE trên output cuối chuỗi; chuẩn hóa min-max fit trên train, áp dụng cho test.
-        \item Cấu hình: 300 epochs, learning rate 0.01, gradient clipping $\tau = 5$.
-        \item Kết quả test: RMSE $\approx 1.45$, MAE $\approx 1.19$.
-    \end{itemize}
+    \begin{columns}[T,totalwidth=\textwidth]
+        \column{0.55\textwidth}
+        \textbf{Bài toán \& kiến trúc}
+        \begin{itemize}
+            \item Many-to-one: cửa sổ 20 giá $\to$ dự báo 1 giá tiếp theo.
+            \item Kiến trúc: 1 input, 16 hidden (tanh), 1 output tuyến tính.
+            \item Loss: MSE trên output cuối chuỗi; dữ liệu min-max fit trên train, dùng lại cho test.
+        \end{itemize}
+        \textbf{Huấn luyện}
+        \begin{itemize}
+            \item 300 epochs, lr = 0.01.
+            \item Gradient clipping $\tau = 5$ để tránh exploding.
+        \end{itemize}
+
+        \column{0.45\textwidth}
+        \textbf{Hiệu năng test}
+        \begin{itemize}
+            \item RMSE $\approx 1.45$
+            \item MAE $\approx 1.19$
+        \end{itemize}
+        \vspace{0.5em}
+        \textbf{Ghi chú}
+        \begin{itemize}
+            \item Chuỗi synthetic: sóng sin + nhiễu, 320 điểm train / 100 điểm test.
+            \item Dự báo dùng tham số đã huấn luyện; không dùng thêm thông tin test.
+        \end{itemize}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Code huấn luyện RNN (1/2)}
