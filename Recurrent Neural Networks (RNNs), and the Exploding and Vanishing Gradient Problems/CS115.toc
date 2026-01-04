@@ -1,0 +1,4 @@
+\babel@toc {vietnamese}{}\relax 
+\beamer@sectionintoc {1}{Introduction \& Notation}{2}{0}{1}
+\beamer@sectionintoc {2}{Train Recurrent Neural Networks}{13}{0}{2}
+\beamer@sectionintoc {3}{Exploding And Vanishing Gradient Problems}{31}{0}{3}

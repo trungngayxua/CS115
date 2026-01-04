@@ -1,0 +1,681 @@
+\documentclass{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\ifPDFTeX
+    \usepackage[utf8]{inputenc}
+    \usepackage[T5]{fontenc}
+    \usepackage[vietnamese]{babel}
+\else
+    \usepackage{polyglossia}
+    \setmainfont{Times New Roman}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    \setdefaultlanguage{vietnamese}
+\fi
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{bm}
+\usepackage{graphicx}
+\graphicspath{{./}{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems/}{../MSSV_Ten_StockPredictionRNN/results/}}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\title{Recurrent Neural Networks and the Exploding and Vanishing Gradient Problems}
+\author{Le Quang Trung, Nguyen Ngoc Hung, Tran Le Anh Pha}
+\date{\today}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Introduction \& Notation}
+
+\begin{frame}{Mục lục chương 1}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{Sequential Data}
+    Dữ liệu chuỗi (sequential data) là các phần tử được sắp theo thứ tự tạo thành chuỗi.
+    \begin{itemize}
+        \item Ví dụ: chuỗi thời gian, chuỗi DNA, hoặc chuỗi hành vi người dùng.
+        \item Mô hình chuỗi (sequence models) nhận/ xuất dữ liệu dạng chuỗi.
+    \end{itemize}
+    \medskip
+\end{frame}
+
+\begin{frame}{What Are Recurrent Neural Networks?}
+    Recurrent Neural Networks (RNNs) là kiến trúc mạng nơ-ron dùng để phát hiện quy luật trong dữ liệu chuỗi.
+    \begin{itemize}
+        \item Có thể áp dụng cho ảnh sau khi tách ảnh thành các patch có thứ tự.
+        \item Điểm khác biệt với feedforward neural networks (MLP) là cách thông tin được truyền qua thời gian.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Model Architecture}
+    RNN có chu trình (cycles) truyền thông tin ngược trong mạng, cho phép mô hình xét các input trước đó $X_{0:t-1}$ thay vì chỉ input hiện tại $X_t$.
+\end{frame}
+
+\begin{frame}{Model Architecture}
+    Gọi hidden state tại thời điểm $t$ là $H_t$ và input là $X_t$. Các tham số được chia sẻ: $W_{xh}$, $W_{hh}$, $W_{ho}$, cùng bias $b_h$, $b_o$. Activation function $\phi$ thường là logistic sigmoid hoặc $\tanh$.
+    \begin{align*}
+        H_t &= \phi_h\!\left(X_t W_{xh} + H_{t-1} W_{hh} + b_h\right), \\
+        O_t &= \phi_o\!\left(H_t W_{ho} + b_o\right).
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Loss Function}
+    Hàm loss đánh giá hiệu năng bằng cách so sánh output $y_t$ với target $z_t$:
+    \[
+        \mathcal{L}(y, z) = \sum_{t=1}^{T} \ell_t(y_t, z_t).
+    \]
+    Loss phụ thuộc bài toán; ví dụ: Euclidean distance, Hamming distance, cross-entropy.
+\end{frame}
+
+\begin{frame}{Pros and Cons}
+    \textbf{Ưu điểm}
+    \begin{itemize}
+        \item Xử lý chuỗi độ dài bất kỳ, chia sẻ weights qua thời gian.
+        \item Kích thước mô hình không tăng theo độ dài chuỗi.
+        \item Tính toán xét đến thông tin quá khứ.
+    \end{itemize}
+    \textbf{Nhược điểm}
+    \begin{itemize}
+        \item Tính toán có thể chậm.
+        \item Khó lấy thông tin ở quá khứ xa.
+        \item Không xét được input tương lai khi tạo state hiện tại.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Various Usage of RNNs: One-to-One}
+    \begin{itemize}
+        \item One-to-One RNNs (vanilla neural networks) dùng cho tác vụ một input, một output.
+        % \item Thường gặp trong các bài toán machine learning tổng quát.
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.55\linewidth]{template-1_image_page11_1.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Various Usage of RNNs: One-to-Many}
+    \begin{itemize}
+        \item One-to-Many RNNs sinh nhiều output từ một input.
+        \item Ứng dụng: music generation, image captioning.
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{template-1_image_page12_1.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Various Usage of RNNs: Many-to-One}
+    \begin{itemize}
+        \item Many-to-One RNNs nhận chuỗi input và xuất một output cố định.
+        \item Ví dụ phổ biến: sentiment analysis.
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{template-1_image_page13_1.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Various Usage of RNNs: Many-to-Many}
+    \begin{itemize}
+        \item Many-to-Many RNNs ánh xạ chuỗi input sang chuỗi output.
+        \item Số bước bằng nhau: số input = số output (ví dụ: named-entity recognition).
+        \item Số bước khác nhau: độ dài input khác output (ví dụ: machine translation).
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{template-1_image_page14_1.png}
+    \end{center}
+\end{frame}
+
+\section{Train Recurrent Neural Networks}
+
+\begin{frame}{Mục lục chương 2}
+    \tableofcontents[currentsection]
+    \medskip
+    \textbf{Yêu cầu bổ sung:} Các hình vẽ và kết quả demo cần được nhúng vào trong slides.
+\end{frame}
+
+\begin{frame}{Thiết lập ký hiệu \& công thức sẽ dùng}
+    \begin{itemize}
+        \item \textbf{Input/hidden/output:} $\bm{x}_t$ (đầu vào), $\bm{h}_t$ (hidden state), $\bm{o}_t$ (đầu ra).
+        \item \textbf{Tiền kích hoạt hidden:} $\bm{a}_t = \bm{W}_{hx}\bm{x}_t + \bm{W}_{hh}\bm{h}_{t-1} + \bm{b}_h$.
+        \item \textbf{Hidden:} $\bm{h}_t = \phi_h(\bm{a}_t)$, đạo hàm $\phi_h'$ (ví dụ $\tanh$).
+        \item \textbf{Tiền kích hoạt output:} $\bm{z}_t = \bm{W}_{qh}\bm{h}_t + \bm{b}_q$.
+        \item \textbf{Output:} $\bm{o}_t = \phi_o(\bm{z}_t)$, với $\phi_o$ là activation/output layer (tuyến tính, softmax, sigmoid... tùy bài toán).
+        \item \textbf{Loss chuỗi:} $\displaystyle \mathcal{L} = \frac{1}{T}\sum_{t=1}^{T} \ell(\bm{o}_t, \bm{y}_t)$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Quy trình huấn luyện RNN}
+    Quy trình thường sẽ như thế này:
+    \begin{itemize}
+        \item Forward Pass: tính toán đầu ra và sai số (Loss).
+        \item Backward Pass: tính gradient $\nabla J$.
+        \item Update Rule (Optimizer): dùng gradient để cập nhật tham số với các lựa chọn phổ biến:
+        \begin{itemize}
+            \item Batch Gradient Descent
+            \item Stochastic Gradient Descent
+            \item Mini-batch Gradient Descent
+        \end{itemize}
+    \end{itemize}
+    \medskip
+\end{frame}
+
+\begin{frame}{Forward pass: tính toán qua thời gian}
+    \begin{itemize}
+        \item Khởi tạo $\bm{h}_0 = 0$.
+        \item Với mỗi bước $t = 1,\ldots,T$:
+        \[
+            \bm{a}_t = \bm{W}_{hx}\bm{x}_t + \bm{W}_{hh}\bm{h}_{t-1} + \bm{b}_h,\qquad
+            \bm{h}_t = \phi_h(\bm{a}_t)
+        \]
+        \[
+            \bm{z}_t = \bm{W}_{qh}\bm{h}_t + \bm{b}_q,\qquad
+            \bm{o}_t = \phi_o(\bm{z}_t)
+        \]
+        \item Tính loss tổng/ trung bình:
+        \[
+            \mathcal{L} = \frac{1}{T}\sum_{t=1}^{T} \ell(\bm{o}_t, \bm{y}_t)
+        \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Computational graph}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=1.8cm, auto, every node/.style={font=\footnotesize}]
+        % column 1 (t=1)
+        \node (x1) {$\bm{x}_{1}$};
+        \node[right=1.8cm of x1] (a1) {$\bm{a}_{1}$};
+        \node[right=1.8cm of a1] (h1) {$\bm{h}_{1}$};
+        \node[right=1.8cm of h1] (z1) {$\bm{z}_{1}$};
+        \node[right=1.8cm of z1] (o1) {$\bm{o}_{1}$};
+        \node[above=0.9cm of o1] (l1) {$\ell(\bm{o}_{1},\bm{y}_{1})$};
+
+        % column 2 (t=2)
+        \node[below=1.8cm of x1] (x2) {$\bm{x}_{2}$};
+        \node[right=1.8cm of x2] (a2) {$\bm{a}_{2}$};
+        \node[right=1.8cm of a2] (h2) {$\bm{h}_{2}$};
+        \node[right=1.8cm of h2] (z2) {$\bm{z}_{2}$};
+        \node[right=1.8cm of z2] (o2) {$\bm{o}_{2}$};
+        \node[above=0.9cm of o2] (l2) {$\ell(\bm{o}_{2},\bm{y}_{2})$};
+
+        % column 3 (t=3)
+        \node[below=1.8cm of x2] (x3) {$\bm{x}_{3}$};
+        \node[right=1.8cm of x3] (a3) {$\bm{a}_{3}$};
+        \node[right=1.8cm of a3] (h3) {$\bm{h}_{3}$};
+        \node[right=1.8cm of h3] (z3) {$\bm{z}_{3}$};
+        \node[right=1.8cm of z3] (o3) {$\bm{o}_{3}$};
+        \node[above=0.9cm of o3] (l3) {$\ell(\bm{o}_{3},\bm{y}_{3})$};
+
+        % shared biases
+        \node[above=1.2cm of x1] (bh) {$\bm{b}_h$};
+        \node[above=1.2cm of z2] (bq) {$\bm{b}_q$};
+
+        % intra-step edges
+        \foreach \xt/\at/\htn/\zt/\ot in {x1/a1/h1/z1/o1, x2/a2/h2/z2/o2, x3/a3/h3/z3/o3}{
+            \path[->] (\xt) edge node {$\bm{W}_{hx}$} (\at);
+            \path[->] (\at) edge node {$\phi_h$} (\htn);
+            \path[->] (\htn) edge node {$\bm{W}_{qh}$} (\zt);
+            \path[->] (\zt) edge node {$\phi_o$} (\ot);
+        };
+
+        % recurrent edges h_{t-1} -> a_t
+        \path[->,thick] (h1) edge[bend left=15] node {$\bm{W}_{hh}$} (a2);
+        \path[->,thick] (h2) edge[bend left=15] node {$\bm{W}_{hh}$} (a3);
+
+        % loss edges
+        \foreach \ot/\lt in {o1/l1, o2/l2, o3/l3}{
+            \path[->] (\ot) edge (\lt);
+        };
+
+        % bias connections (shared qua các bước thời gian)
+        \path[->,dashed] (bh) edge[bend left=12] (a1);
+        \path[->,dashed] (bh) edge[bend left=8] (a2);
+        \path[->,dashed] (bh) edge[bend left=5] (a3);
+
+        \path[->,dashed] (bq) edge[bend left=12] (z1);
+        \path[->,dashed] (bq) edge (z2);
+        \path[->,dashed] (bq) edge[bend right=12] (z3);
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Computational graph}
+  \textbf{Hai insight quan trọng khi lấy đạo hàm theo tham số:}
+  \begin{itemize}
+    \item \textbf{Weight Sharing:}
+    cùng một tham số $W_{hx}, W_{hh}, W_{qh}$ xuất hiện ở mọi timestep, nên
+    \[
+      \frac{\partial \mathcal{L}}{\partial W}
+      = \sum_{t=1}^{T} \frac{\partial \mathcal{L}_t}{\partial W}.
+    \]
+
+    \item \textbf{Phụ thuộc qua thời gian:}
+    gradient theo hidden tại thời điểm $t$ nhận đóng góp từ loss hiện tại và từ tương lai:
+    \[
+      \frac{\partial \mathcal{L}}{\partial \mathbf{h}_t}
+      = \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t}
+      + W_{hh}^{\top}\frac{\partial \mathcal{L}}{\partial \mathbf{a}_{t+1}}.
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Gradient theo output đầu ra $\bm{o}_t$}
+    \small
+    \begin{itemize}[leftmargin=*]
+        \item Loss chuỗi: \(\displaystyle \mathcal{L} = \frac{1}{T}\sum_{k=1}^{T} \ell(\bm{o}_k,\bm{y}_k)\).
+        \item Mỗi thời điểm xuất hiện đúng một lần trong tổng nên:
+        \[
+            \frac{\partial \mathcal{L}}{\partial \bm{o}_t}
+            = \frac{1}{T}\,\frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t}
+            \in \mathbb{R}^q.
+        \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Gradient theo bias đầu ra $\bm{b}_q$}
+    \small
+    \begin{align*}
+        \bm{o}_t &= \phi_o(\bm{z}_t),\quad
+        \bm{z}_t = \bm{W}_{qh}\bm{h}_t + \bm{b}_q, \\
+        \mathcal{L} &= \frac{1}{T}\sum_{t=1}^{T} \ell(\bm{o}_t, \bm{y}_t).
+    \end{align*}
+    Vì $\bm{b}_q$ dùng chung cho mọi bước thời gian:
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{b}_q}
+        &= \frac{1}{T}\sum_{t=1}^{T}
+        \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t}
+        \cdot \frac{\partial \bm{o}_t}{\partial \bm{z}_t}
+        \cdot \frac{\partial \bm{z}_t}{\partial \bm{b}_q}
+        && \text{(chuỗi phụ thuộc $\,\bm{b}_q \to \bm{z}_t \to \bm{o}_t \to \ell$)} \\
+        &= \frac{1}{T}\sum_{t=1}^{T}
+        \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t}
+        \odot \phi_o'(\bm{z}_t)
+        && \text{(do $\partial \bm{z}_t / \partial \bm{b}_q = I$)} \\
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Gradient theo trọng số $\bm{W}_{qh}$}
+    \small
+    Sử dụng $\bm{z}_t = \bm{W}_{qh}\bm{h}_t + \bm{b}_q$ và áp dụng chain rule từng bước:
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{W}_{qh}}
+        &= \frac{1}{T}\sum_{t=1}^{T} \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{W}_{qh}}
+        && \text{(tách tổng theo từng thời điểm)} \\
+        &= \frac{1}{T}\sum_{t=1}^{T}
+        \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t}
+        \cdot \frac{\partial \bm{o}_t}{\partial \bm{z}_t}
+        \cdot \frac{\partial \bm{z}_t}{\partial \bm{W}_{qh}}
+        && \text{(chuỗi phụ thuộc $\bm{W}_{qh} \to \bm{z}_t \to \bm{o}_t \to \ell$)} \\
+        &= \frac{1}{T}\sum_{t=1}^{T}
+        \left(
+        \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t}
+        \odot \phi_o'(\bm{z}_t)
+        \right)
+        \bm{h}_t^{\top}
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Gradient theo hidden state $\bm{h}_t$}
+    \small
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{h}_t}
+        &= \underbrace{\frac{1}{T}\frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{h}_t}}_{\text{nhánh output tại $t$}}
+        \;+\;
+        \underbrace{\frac{\partial \mathcal{L}}{\partial \bm{h}_{t+1}} \cdot \frac{\partial \bm{h}_{t+1}}{\partial \bm{h}_t}}_{\text{nhánh hồi quy về tương lai}}.
+    \end{align*}
+    Mở từng nhánh bằng chain rule:
+    \begin{align*}
+        \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{h}_t}
+        &= \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t}
+        \cdot \frac{\partial \bm{o}_t}{\partial \bm{z}_t}
+        \cdot \frac{\partial \bm{z}_t}{\partial \bm{h}_t}
+        && \text{(chuỗi $\bm{h}_t \to \bm{z}_t \to \bm{o}_t \to \ell$)} \\
+        &= \bm{W}_{qh}^{\top}\left(\frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t} \odot \phi_o'(\bm{z}_t)\right), \\
+        \frac{\partial \bm{h}_{t+1}}{\partial \bm{h}_t}
+        &= \frac{\partial \phi_h(\bm{a}_{t+1})}{\partial \bm{a}_{t+1}}
+        \cdot \frac{\partial \bm{a}_{t+1}}{\partial \bm{h}_t}
+        = \operatorname{diag}\!\big(\phi_h'(\bm{a}_{t+1})\big)\,\bm{W}_{hh}^{\top}.
+    \end{align*}
+    Ghép lại:
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{h}_t}
+        &=
+        \frac{1}{T}\,\bm{W}_{qh}^{\top}\left(\frac{\partial \ell}{\partial \bm{o}_t} \odot \phi_o'(\bm{z}_t)\right) \\
+        &\quad+
+        \bm{W}_{hh}^{\top}\left(\frac{\partial \mathcal{L}}{\partial \bm{h}_{t+1}} \odot \phi_h'(\bm{a}_{t+1})\right),
+    \end{align*}
+    % với điều kiện biên $\dfrac{\partial \mathcal{L}}{\partial \bm{h}_{T+1}} = \bm{0}$ (không còn bước tương lai).
+\end{frame}
+
+\begin{frame}{Gradient theo $\bm{W}_{hx}$}
+    \small
+    Nhắc lại tiền kích hoạt \& hidden:
+    \[
+        \bm{a}_t = \bm{W}_{hx}\bm{x}_t + \bm{W}_{hh}\bm{h}_{t-1} + \bm{b}_h,
+        \qquad
+        \bm{h}_t = \phi_h(\bm{a}_t).
+    \]
+    \textbf{Với $\bm{W}_{hx}$ (input $\to$ hidden):}
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{W}_{hx}}
+        &= \sum_{t=1}^{T} \frac{\partial \mathcal{L}}{\partial \bm{h}_t} \cdot \frac{\partial \bm{h}_t}{\partial \bm{a}_t} \cdot \frac{\partial \bm{a}_t}{\partial \bm{W}_{hx}}
+        && \text{(dùng trực tiếp $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$ đã suy ra)} \\
+        &= \sum_{t=1}^{T}
+        \left(
+            \frac{\partial \mathcal{L}}{\partial \bm{h}_t}
+            \odot \phi_h'(\bm{a}_t)
+        \right)
+        \bm{x}_t^{\top},
+    \end{align*}
+    vì $\partial \bm{a}_t / \partial \bm{W}_{hx} = \bm{x}_t$. Lưu ý $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$ đã bao gồm hệ số $1/T$ và các đóng góp hồi quy phía sau.
+\end{frame}
+
+\begin{frame}{Gradient theo $\bm{W}_{hh}$}
+    \small
+    Với $\bm{a}_t = \bm{W}_{hx}\bm{x}_t + \bm{W}_{hh}\bm{h}_{t-1} + \bm{b}_h$ suy ra $\partial \bm{a}_t / \partial \bm{W}_{hh} = \bm{h}_{t-1}$.
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{W}_{hh}}
+        &= \sum_{t=1}^{T} \frac{\partial \mathcal{L}}{\partial \bm{h}_t} \cdot \frac{\partial \bm{h}_t}{\partial \bm{a}_t} \cdot \frac{\partial \bm{a}_t}{\partial \bm{W}_{hh}}
+        && \text{(chain rule, dùng $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$ từ slide trước)} \\
+        &= \sum_{t=1}^{T}
+        \left(
+            \frac{\partial \mathcal{L}}{\partial \bm{h}_t} \odot \phi_h'(\bm{a}_t)
+        \right)
+        \bm{h}_{t-1}^{\top},
+    \end{align*}
+    vì $\partial \bm{a}_t / \partial \bm{W}_{hh} = \bm{h}_{t-1}$. Hệ số $1/T$ và ảnh hưởng từ các bước tương lai đã nằm trong $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$.
+\end{frame}
+
+\begin{frame}{Gradient theo bias $\bm{b}_h$}
+    \small
+    Từ $\bm{a}_t = \bm{W}_{hx}\bm{x}_t + \bm{W}_{hh}\bm{h}_{t-1} + \bm{b}_h$ ta có $\partial \bm{a}_t / \partial \bm{b}_h = \bm{I}$.
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{b}_h}
+        &= \sum_{t=1}^{T}
+        \frac{\partial \mathcal{L}}{\partial \bm{h}_t}
+        \cdot \frac{\partial \bm{h}_t}{\partial \bm{a}_t}
+        \cdot \frac{\partial \bm{a}_t}{\partial \bm{b}_h}
+        && \text{(chain rule qua $\bm{a}_t$)} \\
+        &= \sum_{t=1}^{T}
+        \left(
+            \frac{\partial \mathcal{L}}{\partial \bm{h}_t} \odot \phi_h'(\bm{a}_t)
+        \right)
+        && \text{(do $\partial \bm{a}_t / \partial \bm{b}_h = \bm{I}$)}.
+    \end{align*}
+    Tương tự như $\bm{W}_{hx}$, hệ số $1/T$ và các ảnh hưởng lan ngược đã nằm trong $\tfrac{\partial \mathcal{L}}{\partial \bm{h}_t}$.
+\end{frame}
+
+\begin{frame}{Tóm tắt gradient các tham số}
+    \small
+    \begin{align*}
+        \frac{\partial \mathcal{L}}{\partial \bm{b}_q} &= \frac{1}{T}\sum_{t=1}^{T} \frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t} \odot \phi_o'(\bm{z}_t), \\
+        \frac{\partial \mathcal{L}}{\partial \bm{W}_{qh}} &= \frac{1}{T}\sum_{t=1}^{T} \left(\frac{\partial \ell(\bm{o}_t,\bm{y}_t)}{\partial \bm{o}_t} \odot \phi_o'(\bm{z}_t)\right)\bm{h}_t^{\top}, \\
+        \frac{\partial \mathcal{L}}{\partial \bm{W}_{hx}} &= \sum_{t=1}^{T} \left(\frac{\partial \mathcal{L}}{\partial \bm{h}_t} \odot \phi_h'(\bm{a}_t)\right)\bm{x}_t^{\top}, \\
+        \frac{\partial \mathcal{L}}{\partial \bm{W}_{hh}} &= \sum_{t=1}^{T} \left(\frac{\partial \mathcal{L}}{\partial \bm{h}_t} \odot \phi_h'(\bm{a}_t)\right)\bm{h}_{t-1}^{\top}, \\
+        \frac{\partial \mathcal{L}}{\partial \bm{b}_h} &= \sum_{t=1}^{T} \left(\frac{\partial \mathcal{L}}{\partial \bm{h}_t} \odot \phi_h'(\bm{a}_t)\right).
+    \end{align*}
+    Điều kiện biên: \(\frac{\partial \mathcal{L}}{\partial \bm{h}_{T+1}} = \bm{0}\).
+\end{frame}
+
+\begin{frame}[fragile]{Demo: Kiến trúc RNN \& dữ liệu}
+    \textbf{Bài toán}
+    \begin{itemize}
+        \item Dự đoán giá đóng cửa cổ phiếu (Close price) dựa trên \(N\) ngày trước (\textit{lookback} \(= 20\)).
+        \item Bài toán time-series regression (sequence \(\rightarrow\) one).
+    \end{itemize}
+    \medskip
+    \textbf{Tiền xử lý dữ liệu}
+    \begin{itemize}
+        \item Min--Max Scaling đưa giá về \([0,1]\):
+        \[
+            x_{\text{norm}} = \frac{x - x_{\min}}{x_{\max} - x_{\min}}.
+        \]
+        \item Tạo sliding window:
+        \begin{itemize}
+            \item Input: \([x_{t-19}, \ldots, x_t]\).
+            \item Target: \(x_{t+1}\).
+        \end{itemize}
+    \end{itemize}
+    \medskip
+    \textbf{Kiến trúc Traditional RNN}
+    \begin{itemize}
+        \item Input size: 1 (giá), Hidden size: \(H\), Output size: 1 (giá dự đoán).
+        \item Không dùng LSTM / GRU, forward thủ công.
+    \end{itemize}
+    \vspace{0.3em}
+    \scriptsize
+\begin{verbatim}
+scaled = MinMaxScaler().fit_transform(prices)
+X, y = create_sequences(scaled, lookback=20)
+x_win, y_next = X[0], y[0]  # window [x_{t-19},...,x_t], target x_{t+1}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Demo: Forward, loss \& huấn luyện}
+    \textbf{Forward pass (mỗi timestep)}
+    \[
+        h_t = \tanh\!\left(x_t W_{xh} + h_{t-1} W_{hh} + b_h\right), \qquad
+        o_t = h_t W_{qh} + b_q.
+    \]
+    \begin{itemize}
+        \item Hidden activation: \(\tanh\).
+        \item Output activation: tuyến tính (không activation).
+    \end{itemize}
+    \medskip
+    \textbf{Loss function}
+    \begin{itemize}
+        \item Mean Squared Error (MSE):
+    \end{itemize}
+    \[
+        \mathcal{L} = \frac{1}{2}\left(o_T - y\right)^2.
+    \]
+    \medskip
+    \textbf{Huấn luyện}
+    \begin{itemize}
+        \item Backpropagation Through Time (BPTT).
+        \item Gradient clipping để tránh exploding gradient:
+        \[
+            g \leftarrow \frac{g}{\max\!\left(1, \|g\| / \tau\right)}.
+        \]
+        \item Cập nhật tham số bằng Gradient Descent.
+    \end{itemize}
+    \vspace{0.3em}
+    \scriptsize
+\begin{verbatim}
+h[t+1] = np.tanh(x[t]@W_xh + h[t]@W_hh + b_h)
+o[t]   = h[t+1]@W_qh + b_q
+grads = model.backward(y_true=target, y_pred=outputs)
+clip = clip_gradients(grads, tau)[0]; apply_gradients(model.parameters(), clip, lr)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Demo: Loss và độ lớn gradient (có clipping)}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=\linewidth]{loss_curve_clipped.png}
+            \end{center}
+            \vspace{-0.5em}
+            \small Loss giảm ổn định sau khi áp dụng clipping.
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=\linewidth]{gradients_norm.png}
+            \end{center}
+            \vspace{-0.5em}
+            \small Chuẩn gradient được giữ dưới ngưỡng \(\tau\), tránh exploding.
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Demo: Dự đoán giá cổ phiếu}
+    \begin{itemize}
+        \item So sánh giá thật và giá dự đoán sau khi huấn luyện với Gradient Clipping.
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.85\linewidth]{prediction_chart.png}
+    \end{center}
+\end{frame}
+
+\section{Exploding And Vanishing Gradient Problems}
+
+\begin{frame}{Mục lục chương 3}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{Nguồn gốc của vanishing và exploding gradients}
+
+Từ chương trước, gradient theo hidden state tại thời điểm $t$ có dạng:
+\begin{equation}
+\frac{\partial L}{\partial h_t}
+=
+\sum_{k=t}^{T}
+(W_{hh}^\top)^{k-t}
+W_{qh}^\top
+\frac{\partial L}{\partial o_k}.
+\end{equation}
+
+Do đó, độ lớn của gradient phụ thuộc trực tiếp vào các lũy thừa
+của ma trận $W_{hh}^\top$.
+
+\medskip
+
+Vấn đề cốt lõi:
+\begin{itemize}
+\item Gradient bị nhân lặp lại bởi cùng một ma trận qua nhiều bước thời gian.
+\item Hành vi của gradient được quyết định bởi $W_{hh}$ (độ lớn/đặc trưng riêng của ma trận này).
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Ước lượng độ lớn gradient}
+
+Lấy chuẩn hai vế:
+\begin{align}
+\left\|\frac{\partial L}{\partial h_t}\right\|
+&\le
+\sum_{k=t}^{T}
+\left\|(W_{hh}^\top)^{k-t}\right\|
+\left\|W_{qh}^\top\right\|
+\left\|\frac{\partial L}{\partial o_k}\right\|.
+\end{align}
+
+Với chuẩn ma trận dưới chuẩn vector:
+\begin{equation}
+\left\|(W_{hh}^\top)^{k-t}\right\|
+\le
+\|W_{hh}\|^{k-t}.
+\end{equation}
+
+Do đó:
+\begin{equation}
+\left\|\frac{\partial L}{\partial h_t}\right\|
+\lesssim
+\sum_{k=t}^{T}
+\|W_{hh}\|^{k-t}.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{Điều kiện vanishing và exploding gradients}
+
+Xét giới hạn khi độ dài chuỗi tăng ($T \to \infty$):
+
+\medskip
+
+\begin{itemize}
+\item Nếu $\|W_{hh}\| < 1$:
+\[
+\|W_{hh}\|^{k-t} \to 0
+\quad \Rightarrow \quad
+\text{gradient vanishing}.
+\]
+
+\item Nếu $\|W_{hh}\| > 1$:
+\[
+\|W_{hh}\|^{k-t} \to \infty
+\quad \Rightarrow \quad
+\text{gradient exploding}.
+\]
+
+\item Nếu $\|W_{hh}\| \approx 1$:
+\[
+\text{gradient được duy trì ổn định}.
+\]
+\end{itemize}
+
+\medskip
+
+Trong thực hành, điều kiện này tương đương với
+bán kính phổ (spectral radius) của $W_{hh}$.
+
+\end{frame}
+
+\begin{frame}{Tóm tắt vấn đề}
+
+Vanishing và exploding gradients là hệ quả trực tiếp của việc:
+\begin{itemize}
+\item Nhân lặp cùng một ma trận $W_{hh}$ qua nhiều bước thời gian.
+\item Gradient là tổng của các chuỗi lũy thừa ma trận.
+\end{itemize}
+
+Do đó, việc huấn luyện RNN chuỗi dài gặp khó khăn
+ngay cả trong trường hợp tuyến tính đơn giản.
+
+\end{frame}
+
+\begin{frame}{Giải pháp 1: Gradient Clipping}
+
+Gradient clipping giới hạn độ lớn gradient trong quá trình cập nhật.
+
+\medskip
+
+Cụ thể:
+\begin{equation}
+g \leftarrow \frac{g}{\max\left(1, \frac{\|g\|}{\tau}\right)},
+\end{equation}
+trong đó $g$ là gradient và $\tau$ là ngưỡng.
+
+\medskip
+
+Đặc điểm:
+\begin{itemize}
+\item Không loại bỏ nguyên nhân gốc rễ.
+\item Ngăn gradient exploding trong thực tế.
+\item Dễ cài đặt, được dùng phổ biến.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Giải pháp 2: Long Short-Term Memory (LSTM)}
+
+LSTM thay đổi kiến trúc RNN bằng cách:
+\begin{itemize}
+\item Tạo đường truyền gradient gần như tuyến tính theo thời gian.
+\item Tránh nhân lặp trực tiếp bởi cùng một ma trận.
+\end{itemize}
+
+\medskip
+
+Trạng thái cell $c_t$ được cập nhật dưới dạng:
+\begin{equation}
+c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t,
+\end{equation}
+trong đó $f_t$ là forget gate.
+
+\medskip
+
+Gradient có thể đi xuyên qua nhiều bước thời gian
+mà không bị vanishing hoặc exploding nghiêm trọng.
+
+\end{frame}
+
+
+\end{document}

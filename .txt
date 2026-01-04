@@ -1,0 +1,78 @@
+Dựa trên tài liệu CS115.tex bạn cung cấp, demo này tập trung vào việc hiện thực hóa lý thuyết Backpropagation Through Time (BPTT) và giải quyết vấn đề Exploding Gradients bằng Gradient Clipping trên kiến trúc Traditional RNN (không dùng LSTM/GRU).
+
+Vì vậy, cấu trúc thư mục cần phân tách rõ phần tính toán Gradient (đạo hàm) và phần xử lý Clipping để giảng viên thấy bạn đang áp dụng đúng công thức trong slide.
+
+Dưới đây là cấu trúc file zip được viết lại:
+Cấu trúc thư mục (File Zip)
+Plaintext
+
+MSSV_Ten_StockPredictionRNN/
+├── data/
+│   └── stock_price.csv            # Dữ liệu đầu vào (Input/Target)
+├── parameters/
+│   ├── weights.npy                # Ma trận trọng số W_hx, W_hh, W_qh sau khi train
+│   └── biases.npy                 # Bias b_h, b_q sau khi train
+├── results/
+│   ├── loss_curve_clipped.png     # Biểu đồ Loss (chứng minh hội tụ khi dùng Clipping)
+│   ├── gradients_norm.png         # (Nên có) Biểu đồ độ lớn Gradient để chứng minh Clipping hoạt động
+│   └── prediction_chart.png       # Kết quả dự đoán giá cổ phiếu
+├── src/
+│   ├── rnn_core.py                # Class RNN (Forward & Backward pass thủ công)
+│   ├── optimizer.py               # Chứa hàm Gradient Clipping & Update weights
+│   ├── train.py                   # Vòng lặp huấn luyện chính
+│   └── utils.py                   # Hàm load data, chuẩn hóa (MinMax Scaler)
+└── README.md                      # Hướng dẫn & Giải thích công thức áp dụng
+
+Chi tiết nội dung các file (Map với slide CS115.tex)
+
+Để bài làm khớp với lý thuyết trong file .tex bạn gửi, nội dung code cần thể hiện các điểm sau:
+1. src/rnn_core.py (Lõi RNN & Backpropagation)
+
+File này chứa class TraditionalRNN. Nó phải hiện thực 2 hàm chính tương ứng với Chương 2 của slide:
+
+    forward(x):
+
+        Tính toán hidden state ht​ và output ot​ theo công thức:
+        Ht​=ϕh​(Xt​Wxh​+Ht−1​Whh​+bh​)
+        Ot​=ϕo​(Ht​Who​+bo​)
+
+        Nguồn: Slide "Model Architecture" và "Forward pass".
+
+backward(y_true, y_pred):
+
+    Đây là phần quan trọng nhất. Bạn phải code tính toán Gradient theo chuỗi thời gian (BPTT).
+
+    Phải tính được ∂ht​∂L​ dựa trên tổng gradient từ loss hiện tại và từ tương lai (nhánh hồi quy) .
+
+Tính gradient cho các ma trận trọng số Whh​,Whx​,Wqh​ dựa trên công thức tổng quát trong slide.
+
+2. src/optimizer.py (Gradient Clipping)
+
+File này giải quyết vấn đề nêu ra ở Chương 3. Bạn cần một hàm clip_gradients(gradients, tau):
+
+    Logic: Kiểm tra độ lớn (norm) của gradient. Nếu vượt quá ngưỡng τ (tau), thực hiện thu nhỏ gradient.
+
+    Công thức áp dụng:
+    g←max(1,τ∥g∥​)g​
+
+    Mục đích: Ngăn chặn Exploding Gradient khi Whh​ lớn. Nếu không có hàm này, model Traditional RNN dự đoán chứng khoán rất dễ bị lỗi NaN (Not a Number) khi train sâu.
+
+3. src/train.py
+
+File chạy quy trình huấn luyện:
+
+    Forward Pass: Tính ra giá dự đoán.
+
+    Loss Calculation: Tính sai số (ví dụ MSE).
+
+    Backward Pass: Gọi hàm từ rnn_core.py để lấy Gradient.
+
+    Gradient Clipping: Gọi hàm từ optimizer.py để cắt gradient.
+
+    Update Weights: Cập nhật W và b theo Learning Rate.
+
+Gợi ý nội dung file results/ để "ăn điểm"
+
+Vì bạn nhấn mạnh vào Gradient Clipping, trong thư mục kết quả nên có một biểu đồ so sánh hoặc file log:
+
+    gradients_norm.png: Vẽ biểu đồ độ lớn của Gradient qua các epoch. Nó sẽ cho thấy gradient đôi khi vọt lên rất cao nhưng bị "cắt" xuống, chứng minh cơ chế clipping hoạt động đúng như lý thuyết.
