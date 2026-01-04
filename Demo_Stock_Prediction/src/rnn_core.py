@@ -15,7 +15,7 @@ class RNN:
         self.b_q = np.zeros(output_size)
 
     def forward(self, x_seq, h0=None, return_cache: bool = False):
-        """Forward cho mot chuoi (T, input_size). Tra outputs (T, output_size) va h_T."""
+        # Forward cho mot chuoi (T, input_size). Tra outputs (T, output_size) va h_T.
         x_seq = np.asarray(x_seq, dtype=float)
         if x_seq.ndim == 1:
             x_seq = x_seq.reshape(-1, self.input_size)
@@ -48,7 +48,7 @@ class RNN:
         return out_arr, h_prev, cache
 
     def backward(self, cache: dict, target: np.ndarray):
-        """BPTT cho loss 0.5*(o_T - y)^2. Chi dung output cuoi chuoi."""
+        # BPTT cho loss 0.5*(o_T - y)^2. Chi dung output cuoi chuoi.
         x_seq = cache["x_seq"]
         hs = cache["hs"]
         pre_acts = cache["pre_acts"]

@@ -21,7 +21,7 @@
 \usepackage{enumitem}
 \usepackage{bm}
 \usepackage{graphicx}
-\graphicspath{{./}{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems/}{MSSV_Ten_StockPredictionRNN/results/}{../MSSV_Ten_StockPredictionRNN/results/}}
+\graphicspath{{./}{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems/}{Demo_Stock_Prediction/results/}{../Demo_Stock_Prediction/results/}}
 \usepackage{listings}
 \lstset{
     basicstyle=\ttfamily\scriptsize,
@@ -966,20 +966,24 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Code huấn luyện RNN (1/2)}
-    \lstinputlisting[language=Python, firstline=19, lastline=36]{../MSSV_Ten_StockPredictionRNN/src/train.py}
+\begin{frame}[fragile]{Code forward RNN}
+    \lstinputlisting[language=Python, firstline=17, lastline=33]{../Demo_Stock_Prediction/src/rnn_core.py}
 \end{frame}
 
-\begin{frame}[fragile]{Code huấn luyện RNN (2/2)}
-    \lstinputlisting[language=Python, firstline=37, lastline=46]{../MSSV_Ten_StockPredictionRNN/src/train.py}
+\begin{frame}[fragile]{Code backward (1/2)}
+    \lstinputlisting[language=Python, firstline=50, lastline=70]{../Demo_Stock_Prediction/src/rnn_core.py}
+\end{frame}
+
+\begin{frame}[fragile]{Code backward (2/2)}
+    \lstinputlisting[language=Python, firstline=71, lastline=91]{../Demo_Stock_Prediction/src/rnn_core.py}
 \end{frame}
 
 \begin{frame}{Training loss và norm gradient (đã clipping)}
     \begin{center}
     \begin{minipage}{0.48\linewidth}
         \centering
-        \IfFileExists{../MSSV_Ten_StockPredictionRNN/results/training_loss.png}{%
-            \includegraphics[width=\linewidth]{../MSSV_Ten_StockPredictionRNN/results/training_loss.png}%
+        \IfFileExists{../Demo_Stock_Prediction/results/training_loss.png}{%
+            \includegraphics[width=\linewidth]{../Demo_Stock_Prediction/results/training_loss.png}%
         }{%
             \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: training\_loss.png}}%
         }
@@ -988,8 +992,8 @@
     \end{minipage}\hfill
     \begin{minipage}{0.48\linewidth}
         \centering
-        \IfFileExists{../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png}{%
-            \includegraphics[width=\linewidth]{../MSSV_Ten_StockPredictionRNN/results/gradient_norm_log.png}%
+        \IfFileExists{../Demo_Stock_Prediction/results/gradient_norm_log.png}{%
+            \includegraphics[width=\linewidth]{../Demo_Stock_Prediction/results/gradient_norm_log.png}%
         }{%
             \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: gradient\_norm\_log.png}}%
         }
@@ -1005,8 +1009,8 @@
         \item Sai số: RMSE $\approx 1.45$, MAE $\approx 1.19$.
     \end{itemize}
     \begin{center}
-        \IfFileExists{../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png}{%
-            \includegraphics[width=0.8\linewidth]{../MSSV_Ten_StockPredictionRNN/results/test_prediction_chart.png}%
+        \IfFileExists{../Demo_Stock_Prediction/results/test_prediction_chart.png}{%
+            \includegraphics[width=0.8\linewidth]{../Demo_Stock_Prediction/results/test_prediction_chart.png}%
         }{%
             \fbox{\parbox{0.8\linewidth}{\centering \scriptsize Missing image: test\_prediction\_chart.png}}%
         }

@@ -1,2 +1,2 @@
-\frametitle{Code huấn luyện RNN (2/2)}
-\lstinputlisting[language=Python, firstline=37, lastline=46]{../MSSV_Ten_StockPredictionRNN/src/train.py}
+\frametitle{Code backward (2/2)}
+\lstinputlisting[language=Python, firstline=71, lastline=91]{../Demo_Stock_Prediction/src/rnn_core.py}
