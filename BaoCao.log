@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  8 JAN 2026 15:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  8 JAN 2026 19:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -678,16 +678,16 @@ Package pdftex.def Info: Slide/test_prediction_chart.png  used on input line 131
 [4 <./Slide/training_loss.png>]
 
 [5 <./Slide/test_prediction_chart.png>]
-<Slide/vanishing_exploding_gradient.png, id=114, 722.7pt x 433.62pt>
-File: Slide/vanishing_exploding_gradient.png Graphic file (type png)
-<use Slide/vanishing_exploding_gradient.png>
-Package pdftex.def Info: Slide/vanishing_exploding_gradient.png  used on input line 186.
-(pdftex.def)             Requested size: 385.02547pt x 231.01509pt.
+<611862241_1268077568536299_6065835046817082129_n.png, id=114, 876.27374pt x 549.05125pt>
+File: 611862241_1268077568536299_6065835046817082129_n.png Graphic file (type png)
+<use 611862241_1268077568536299_6065835046817082129_n.png>
+Package pdftex.def Info: 611862241_1268077568536299_6065835046817082129_n.png  used on input line 186.
+(pdftex.def)             Requested size: 385.02547pt x 241.24818pt.
 
 
 [6]
 
-[7 <./Slide/vanishing_exploding_gradient.png>] (./BaoCao.aux)
+[7 <./611862241_1268077568536299_6065835046817082129_n.png>] (./BaoCao.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -696,17 +696,17 @@ Package rerunfilecheck Info: File `BaoCao.out' has not changed.
 (rerunfilecheck)             Checksum: CBAA7C3976576EA82D60E3C0FBB5C9D3;2830.
  ) 
 Here is how much of TeX's memory you used:
- 12562 strings out of 469220
- 193825 string characters out of 5462267
+ 12560 strings out of 469220
+ 193847 string characters out of 5462267
  614445 words of memory out of 5000000
- 40845 multiletter control sequences out of 15000+600000
+ 40843 multiletter control sequences out of 15000+600000
  648016 words of font info for 81 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  75i,13n,79p,860b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb>
-Output written on BaoCao.pdf (8 pages, 340891 bytes).
+Output written on BaoCao.pdf (8 pages, 339497 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
+ 207 PDF objects out of 1000 (max. 8388607)
  156 compressed objects within 2 object streams
  26 named destinations out of 1000 (max. 500000)
  112 words of extra memory for PDF output out of 10000 (max. 10000000)
