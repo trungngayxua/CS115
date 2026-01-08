@@ -1,0 +1,200 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{setspace}
+\usepackage{amsmath, amssymb, bm}
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{{Slide/}}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlist{leftmargin=1.5em}
+
+\linespread{1.1}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+\title{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems}
+\author{Nhóm 6: Lê Quang Trung, Nguyễn Ngọc Hưng, Trần Lê Anh Pha}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    {\large \textbf{ĐẠI HỌC QUỐC GIA TP.HCM}}\\[0.25em]
+    {\large \textbf{TRƯỜNG ĐH CÔNG NGHỆ THÔNG TIN}}\\[2em]
+
+    {\large Môn học: CS115 -- Toán cho Khoa học máy tính}\\[1em]
+
+    {\huge \textbf{BÁO CÁO ĐỒ ÁN}}\\[0.75em]
+    {\LARGE \textbf{Recurrent Neural Networks (RNNs), and the Exploding and Vanishing Gradient Problems}}\\[3em]
+
+    \begin{tabular}{l l}
+        GVHD: & [Lương Ngọc Hoàng] \\
+        Nhóm thực hiện: & Nhóm 6 \\
+        & Lê Quang Trung \\
+        & Nguyễn Ngọc Hưng \\
+    \end{tabular}
+
+    \vfill
+    {\large TP. Hồ Chí Minh, \today}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\begin{abstract}
+    Báo cáo này trình bày cơ sở toán học của Recurrent Neural Networks, tập trung vào cơ chế lan truyền ngược qua thời gian (BPTT) và các vấn đề bùng nổ (exploding) và triệt tiêu (vanishing) gradient. Tính hiệu quả của mô hình được minh họa qua bài toán dự báo chuỗi thời gian giá cổ phiếu (dữ liệu crawl), trong khi hiện tượng bất ổn của gradient được phân tích và đề xuất cách khắc phục bằng Gradient Clipping và kiến trúc LSTM.
+\end{abstract}
+
+\section{Tổng quan về Recurrent Neural Networks}
+
+\subsection{Dữ liệu chuỗi là gì?}
+Trong nhiều bài toán học máy, dữ liệu được giả định độc lập và phân phối như nhau (i.i.d). Với dữ liệu chuỗi (chuỗi thời gian, ngôn ngữ tự nhiên, gen), thứ tự chứa thông tin quan trọng. RNN giải quyết bài toán này bằng cách duy trì một trạng thái ẩn $\bm{h}_t$ đóng vai trò bộ nhớ theo thời gian.
+
+\subsection{Kiến trúc mô hình}
+RNN chia sẻ tham số trọng số qua mọi bước thời gian. Các công thức sau mô tả kiến trúc \emph{many-to-many}, nơi mỗi bước vào sinh một bước ra:
+\begin{align*}
+    \bm{h}_t &= \phi_h\!\left(\bm{x}_t W_{xh} + \bm{h}_{t-1} W_{hh} + \bm{b}_h\right), \\
+    \bm{o}_t &= \phi_o\!\left(\bm{h}_t W_{ho} + \bm{b}_o\right),
+\end{align*}
+với $\phi_h$ và $\phi_o$ là hàm kích hoạt (thường dùng $\tanh$ hoặc sigmoid).
+
+\section{Huấn luyện RNN}
+
+\subsection{Thuật toán Lan truyền ngược qua thời gian (BPTT)}
+Trước hết, xác định hàm mất mát tổng trên chuỗi many-to-many dài $T$ bước, với một \emph{mất mát ở mỗi thời điểm}:
+\[
+    \mathcal{L} = \sum_{t=1}^{T} \ell_t(\bm{y}_t, \bm{z}_t).
+\]
+Do chia sẻ trọng số, đạo hàm của $\mathcal{L}$ theo một tham số là tổng đóng góp từ mọi bước thời gian. Với RNN many-to-many, $\ell_t$ được tính tại \emph{mọi} bước, nên gradient tích lũy toàn bộ chuỗi. BPTT dựng đồ thị tính toán theo trục thời gian, áp dụng quy tắc chuỗi để lan truyền gradient từ tương lai về quá khứ.
+
+\subsection{Các công thức gradient đã tìm ra}
+Các công thức đạo hàm chính cho RNN many-to-many:
+\begin{itemize}
+    \item \textbf{Loss chuỗi}: $\displaystyle \mathcal{L} = \sum_{t=1}^{T} \ell_t(\bm{y}_t, \bm{z}_t)$.
+    \item \textbf{Sai số tầng hidden}: $\bm{\delta}_t = \left(\frac{\partial \mathcal{L}}{\partial \bm{h}_t} \odot \phi_h'(\bm{a}_t)\right)$, với $\bm{a}_t = \bm{x}_t W_{xh} + \bm{h}_{t-1} W_{hh} + \bm{b}_h$.
+    \item \textbf{Gradient $W_{xh}$}: $\displaystyle \frac{\partial \mathcal{L}}{\partial W_{xh}} = \sum_{t=1}^{T} \bm{\delta}_t \bm{x}_t^{\top}$.
+    \item \textbf{Gradient $W_{hh}$}: $\displaystyle \frac{\partial \mathcal{L}}{\partial W_{hh}} = \sum_{t=1}^{T} \bm{\delta}_t \bm{h}_{t-1}^{\top}$ \,\,(\emph{nguồn gốc vanishing/exploding do tích lũy thời gian}).
+    \item \textbf{Gradient $W_{ho}$}: $\displaystyle \frac{\partial \mathcal{L}}{\partial W_{ho}} = \sum_{t=1}^{T} \frac{\partial \mathcal{L}}{\partial \bm{o}_t}\,\bm{h}_t^{\top}$.
+\end{itemize}
+
+\section{Thực nghiệm 1: Dự báo giá chứng khoán}
+\textbf{Bài toán}: Many-to-One RNN dự báo giá dựa trên chuỗi quá khứ.
+\begin{itemize}
+    \item \textbf{Dữ liệu}: Giá đóng cửa theo ngày crawl từ Stooq, lưu CSV và tách train/test theo thời gian với tỉ lệ 80/20.
+    \item \textbf{Tiền xử lý}: Chuẩn hóa Min--Max fit trên tập train, tạo cửa sổ trượt lookback=20. Mỗi mẫu $X \in \mathbb{R}^{20 \times 1}$, nhãn $y$ là giá ở bước kế tiếp (one-step ahead).
+    \item \textbf{Mô hình}: RNN thuần 1 lớp, hidden size 16, $\tanh$; output tuyến tính; loss $0{.}5(o_T - y)^2$ chỉ trên bước cuối; BPTT thủ công.
+    \item \textbf{Huấn luyện}: Gradient Descent theo kiểu full-batch (gộp trung bình gradient toàn bộ chuỗi), learning rate $0{.}01$, 300 epoch, áp dụng Gradient Clipping với ngưỡng $\tau = 5$.
+    \item \textbf{Đánh giá}: Dự báo trên test, đảo chuẩn hóa bằng scaler của train và tính RMSE/MAE.
+\end{itemize}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        Chỉ số & Giá trị \\
+        \midrule
+        RMSE (test) & $\approx 136.39$ \\
+        MAE (test)  & $\approx 135.67$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Hiệu năng dự báo trên tập kiểm tra.}
+\end{table}
+\textbf{Kết luận}:
+\begin{itemize}
+  \item Kết quả RMSE $\approx 136.39$ và MAE $\approx 135.67$ vẫn còn lớn so với biên độ giá trong demo (khoảng $220$--$540$), cho thấy sai số trung bình ở mức hàng trăm đơn vị nên giá trị dự báo thực tế còn hạn chế. Đường dự báo thường bám quanh mức trung bình và bị trễ so với biến động thực; clipping chủ yếu giúp tránh exploding gradient chứ chưa cải thiện đáng kể năng lực mô hình. \\
+\end{itemize}
+\textbf{Lý do chính}:
+\begin{itemize}
+    \item \textbf{Kiến trúc quá cơ bản}: RNN thuần không có cơ chế cổng (LSTM/GRU), nên khả năng giữ thông tin dài hạn yếu và nhạy với vanishing/exploding.
+    \item \textbf{Dung lượng mô hình nhỏ}: Chỉ 1 lớp với hidden 16 khiến mô hình dễ underfit trước động lực giá phức tạp.
+    \item \textbf{Tín hiệu học tập mỏng}: Loss chỉ lấy ở bước cuối làm gradient học được từ chuỗi bị hạn chế, khó khai thác cấu trúc theo thời gian.
+    \item \textbf{Tối ưu hóa đơn giản}: Full-batch GD với learning rate cố định và chỉ dùng clipping giúp ổn định nhưng không tăng năng lực dự báo.
+    \item \textbf{Đầu vào tối giản}: Chỉ dùng chuỗi Close và dự báo giá tuyệt đối làm bài toán khó hơn, mô hình nhỏ dễ học quanh mức trung bình.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{training_loss.png}
+    \caption{Quá trình huấn luyện với Gradient Clipping ($\tau=5$).}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test_prediction_chart.png}
+    \caption{Dự báo giá chứng khoán (dữ liệu crawl từ Stooq).}
+\end{figure}
+
+\section{Vấn đề Gradient và Thiết kế Thực nghiệm}
+
+\subsection{Phân tích nguyên nhân Vanishing/Exploding Gradient}
+\textbf{Nguồn gốc toán học.} Khi lan truyền ngược BPTT từ bước $k$ về $t$, gradient đi qua tích của các Jacobian:
+\[
+    \frac{\partial \mathcal{L}}{\partial \bm{h}_t}
+    = \sum_{k=t}^{T}
+    \left( \prod_{i=t+1}^{k} \underbrace{\operatorname{diag}\big(\phi_h'(\bm{a}_i)\big)\, W_{hh}^{\top}}_{J_i} \right)
+    \frac{\partial \mathcal{L}_k}{\partial \bm{h}_k}.
+\]
+Do $\|\operatorname{diag}(\phi_h')\| \le \gamma \le 1$ (tanh/sigmoid bão hòa), ta có
+\[
+    \left\| \frac{\partial \mathcal{L}}{\partial \bm{h}_t} \right\|
+    \le \sum_{k=t}^{T} \gamma^{k-t} \, \|W_{hh}\|^{\,k-t} \, \left\|\frac{\partial \mathcal{L}_k}{\partial \bm{h}_k}\right\|.
+\]
+Như vậy độ lớn gradient phụ thuộc lũy thừa của $\gamma \|W_{hh}\|$ (xấp xỉ bán kính phổ của $W_{hh}$ khi $\gamma \approx 1$):
+\begin{itemize}
+    \item $\gamma \|W_{hh}\| < 1 \ \Rightarrow\ $ tích Jacobian suy giảm theo hàm mũ $\to$ vanishing.
+    \item $\gamma \|W_{hh}\| > 1 \ \Rightarrow\ $ tích Jacobian phình to theo hàm mũ $\to$ exploding.
+    \item Kích hoạt bão hòa (tanh/sigmoid) làm $\gamma < 1$ càng kéo gradient về $0$ khi chuỗi dài.
+\end{itemize}
+Ngoài ra, khởi tạo tham số xấu hoặc chuỗi quá dài khiến tích ma trận lặp lại nhiều lần, càng khuếch đại hai hiệu ứng trên.
+
+\subsection{Các giải pháp đề xuất}
+\begin{itemize}
+    \item \textbf{Gradient Clipping}: Cắt chuẩn gradient khi vượt ngưỡng $\tau$, giảm nguy cơ exploding.
+    \item \textbf{LSTM/GRU}: Thay đổi kiến trúc với các cổng để luồng gradient truyền tuyến tính hơn, khắc phục vanishing.
+\end{itemize}
+
+\section{Thực nghiệm 2: Khảo sát sự ổn định của Gradient}
+\textbf{Mục tiêu:} Chứng minh thực nghiệm nhận định lý thuyết về vanishing/exploding bằng cách điều khiển bán kính phổ của $W_{hh}$.
+
+\medskip
+\textbf{Thiết lập:}
+\begin{itemize}
+    \item \textbf{Dữ liệu}: Chuỗi ký tự ``the quick brown fox jumps over the lazy dog'' nhân 200 lần, mã hóa one-hot.
+    \item \textbf{Mô hình}: RNN 1 lớp, hidden size $50$, ReLU; khởi tạo $\bm{W}_{hh}$ theo $\mathcal{N}(0, \tfrac{1}{\sqrt{h}})$ rồi nhân hệ số $\rho$ để thay đổi bán kính phổ.
+    \item \textbf{Huấn luyện}: Chuỗi cắt thành đoạn dài $50$, 200 bước update, learning rate $10^{-4}$; theo dõi $\|\nabla W_{hh}\|_2$ mỗi bước (log-scale).
+    \item \textbf{Kịch bản}: $\rho = 0.90$ (vanishing), $\rho = 0.99$ (gần ổn định), $\rho = 1.20$ (exploding).
+\end{itemize}
+
+\medskip
+\textbf{Kết quả:}
+\begin{itemize}
+    \item \emph{Vanishing} ($\rho=0.90$): Chuẩn gradient giảm dần dưới $1$ và tiếp tục suy giảm khi chuỗi dài hơn, phù hợp tích Jacobian suy giảm.
+    \item \emph{Gần ổn định} ($\rho=0.99$): Chuẩn gradient dao động quanh $10^{1}$, không tăng/giảm đáng kể sau 200 bước.
+    \item \emph{Exploding} ($\rho=1.20$): Chuẩn gradient tăng dần, vượt mốc $\approx 2\times 10^{1}$ về cuối, biểu hiện bùng nổ theo lũy thừa.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{vanishing_exploding_gradient.png}
+    \caption{Độ lớn $\|\nabla W_{hh}\|$ theo bước train ở ba kịch bản $\rho$.}
+\end{figure}
+
+\section{Kết luận}
+Chúng tôi đã trình bày cơ sở toán học của RNN và BPTT, minh họa bằng bài toán dự báo giá cổ phiếu (Thực nghiệm 1) và kiểm chứng hiện tượng vanishing/exploding qua việc điều khiển bán kính phổ của $W_{hh}$ (Thực nghiệm 2). Kết quả cho thấy RNN thuần dễ underfit và nhạy với bất ổn gradient; gradient clipping chỉ giúp ổn định chứ không tăng năng lực biểu diễn, trong khi lựa chọn kiến trúc và khởi tạo là then chốt quyết định việc gradient suy giảm hay bùng nổ. Về thực hành, cần chú trọng khởi tạo/kiến trúc phù hợp và theo dõi chuẩn gradient trong huấn luyện, đặc biệt khi chuỗi dài, để tránh mất ổn định.
+
+\section*{Tài liệu tham khảo}
+\begin{itemize}
+    \item I. Goodfellow, Y. Bengio, A. Courville, \emph{Deep Learning}, MIT Press, 2016.
+    \item R. Pascanu, T. Mikolov, Y. Bengio, ``On the Difficulty of Training Recurrent Neural Networks,'' ICML, 2013.
+    \item S. Hochreiter, J. Schmidhuber, ``Long Short-Term Memory,'' Neural Computation, 1997.
+\end{itemize}
+
+\end{document}

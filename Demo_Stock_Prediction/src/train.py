@@ -10,6 +10,7 @@ from utils import (
     MinMaxScaler,
     create_sequences,
     ensure_demo_data,
+    download_and_split_stock_data,
     load_stock_data,
     plot_gradients,
     plot_loss_curve,
@@ -54,6 +55,16 @@ def main():
     parser.add_argument("--lr", type=float, default=0.01)
     parser.add_argument("--tau", type=float, default=5.0, help="Gradient clipping threshold")
     parser.add_argument("--seed", type=int, default=7)
+    parser.add_argument("--symbol", type=str, default="aapl", help="Ma co phieu tren stooq (vd: aapl, msft, goog)")
+    parser.add_argument("--split-ratio", type=float, default=0.8, help="Ti le train/test tren du lieu tai ve")
+    parser.add_argument("--start-date", type=str, default=None, help="YYYY-MM-DD, mac dinh lay toan bo")
+    parser.add_argument("--end-date", type=str, default=None, help="YYYY-MM-DD, mac dinh lay toan bo")
+    parser.add_argument("--force-download", action="store_true", help="Tai lai du lieu va ghi de train/test CSV")
+    parser.add_argument(
+        "--allow-synthetic-fallback",
+        action="store_true",
+        help="Neu tai du lieu that bai thi sinh du lieu synthetic de khong chan training",
+    )
     args = parser.parse_args()
 
     base_dir = Path(__file__).resolve().parents[1]
@@ -63,7 +74,24 @@ def main():
 
     train_path = data_dir / "train_data.csv"
     test_path = data_dir / "test_data.csv"
-    ensure_demo_data(train_path, test_path, seed=args.seed)
+    data_source = f"stooq:{args.symbol.lower()}"
+    try:
+        download_and_split_stock_data(
+            train_path=train_path,
+            test_path=test_path,
+            symbol=args.symbol,
+            split_ratio=args.split_ratio,
+            start_date=args.start_date,
+            end_date=args.end_date,
+            force_download=args.force_download,
+        )
+    except Exception as exc:
+        if args.allow_synthetic_fallback:
+            print(f"Khong tai duoc du lieu thuc ({exc}). Sinh du lieu synthetic de tiep tuc.")
+            ensure_demo_data(train_path, test_path, seed=args.seed, force_regen=True)
+            data_source = "synthetic"
+        else:
+            raise
 
     prices_train = load_stock_data(train_path)
     scaler = MinMaxScaler()
@@ -93,7 +121,19 @@ def main():
     np.save(parameters_dir / "rnn_weights.npy", weights, allow_pickle=True)
     np.save(parameters_dir / "rnn_biases.npy", biases, allow_pickle=True)
     with open(parameters_dir / "scaler_params.pkl", "wb") as f:
-        pickle.dump({"min_": scaler.min_, "max_": scaler.max_, "lookback": args.lookback}, f)
+        pickle.dump(
+            {
+                "min_": scaler.min_,
+                "max_": scaler.max_,
+                "lookback": args.lookback,
+                "data_source": data_source,
+                "symbol": args.symbol,
+                "start_date": args.start_date,
+                "end_date": args.end_date,
+                "split_ratio": args.split_ratio,
+            },
+            f,
+        )
 
     results_dir.mkdir(parents=True, exist_ok=True)
     plot_loss_curve(losses, results_dir / "training_loss.png")

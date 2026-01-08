@@ -47,7 +47,8 @@
     \begin{itemize}
         \item Lê Quang Trung --- MSSV: 24521883
         \item Nguyễn Ngọc Hưng --- MSSV: 24520610
-g    \end{itemize}
+        \item Trần Lê Anh Pha --- MSSV:
+    \end{itemize}
 \end{frame}
 
 \section{Introduction \& Notation}
@@ -961,15 +962,10 @@ g    \end{itemize}
         \column{0.45\textwidth}
         \textbf{Hiệu năng test}
         \begin{itemize}
-            \item RMSE $\approx 1.45$
-            \item MAE $\approx 1.19$
+            \item RMSE $\approx 136.39$
+            \item MAE $\approx 135.67$
         \end{itemize}
         \vspace{0.5em}
-        \textbf{Ghi chú}
-        \begin{itemize}
-            \item Chuỗi synthetic: sóng sin + nhiễu, 320 điểm train / 100 điểm test.
-            \item Dự báo dùng tham số đã huấn luyện; không dùng thêm thông tin test.
-        \end{itemize}
     \end{columns}
 \end{frame}
 
@@ -1013,7 +1009,7 @@ g    \end{itemize}
 \begin{frame}{Dự báo trên tập test}
     \begin{itemize}
         \item Dùng tham số đã huấn luyện và scaler của train set để dự báo giá test.
-        \item Sai số: RMSE $\approx 1.45$, MAE $\approx 1.19$.
+        \item Sai số: RMSE $\approx 136.39$, MAE $\approx 135.67$.
     \end{itemize}
     \begin{center}
         \IfFileExists{../Demo_Stock_Prediction/results/test_prediction_chart.png}{%
@@ -1175,6 +1171,37 @@ trong đó $f_t$ là forget gate.
 Gradient có thể đi xuyên qua nhiều bước thời gian
 mà không bị vanishing hoặc exploding nghiêm trọng.
 
+\end{frame}
+
+\begin{frame}{Minh họa Gradient Cliping và LSTM}
+    \begin{center}
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \IfFileExists{template-1_image_page29_1.png}{%
+            \includegraphics[width=\linewidth]{template-1_image_page29_1.png}%
+        }{%
+            \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page29\_1.png}}%
+        }
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \IfFileExists{template-1_image_page29_2.png}{%
+            \includegraphics[width=\linewidth]{template-1_image_page29_2.png}%
+        }{%
+            \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page29\_2.png}}%
+        }
+    \end{minipage}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Kết quả thực nghiệm vanishing and exploding}
+    \begin{center}
+    \IfFileExists{vanishing_exploding_gradient.png}{%
+        \includegraphics[width=0.95\linewidth]{vanishing_exploding_gradient.png}%
+    }{%
+        \fbox{\parbox{0.85\linewidth}{\centering \scriptsize Missing image: vanishing\_exploding\_gradient.png}}%
+    }
+    \end{center}
 \end{frame}
 
 

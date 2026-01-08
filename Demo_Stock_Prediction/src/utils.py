@@ -1,6 +1,8 @@
 import csv
+import io
 import math
 import pickle
+import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -63,6 +65,90 @@ def ensure_demo_data(train_path: Path, test_path: Path, seed: int = 0, force_reg
 
     write_csv(train_path, prices[:train_points], 0)
     write_csv(test_path, prices[train_points:], train_points)
+
+
+def _parse_date(date_str: str):
+    return datetime.fromisoformat(date_str)
+
+
+def download_stock_history(
+    symbol: str, start_date: str | None = None, end_date: str | None = None, timeout: int = 10
+):
+    """Tai CSV lich su gia tu stooq (khong can API key). Tra ve list (datetime, close)."""
+    symbol = symbol.lower()
+    url = f"https://stooq.pl/q/d/l/?s={symbol}.us&i=d"
+    with urllib.request.urlopen(url, timeout=timeout) as resp:
+        if resp.status != 200:
+            raise RuntimeError(f"Khong tai duoc du lieu tu {url}, status={resp.status}")
+        content = resp.read().decode("utf-8")
+
+    start_dt = _parse_date(start_date) if start_date else None
+    end_dt = _parse_date(end_date) if end_date else None
+
+    records = []
+    reader = csv.DictReader(io.StringIO(content))
+    for row in reader:
+        date_str = row.get("Date") or row.get("date") or row.get("Data")
+        close_str = row.get("Close") or row.get("close") or row.get("Zamkniecie")
+        if not date_str or not close_str:
+            continue
+        try:
+            dt = _parse_date(date_str)
+            close = float(close_str)
+        except ValueError:
+            continue
+        if start_dt and dt < start_dt:
+            continue
+        if end_dt and dt > end_dt:
+            continue
+        records.append((dt, close))
+
+    records.sort(key=lambda r: r[0])
+    if not records:
+        raise RuntimeError(f"Khong co du lieu hop le cho symbol={symbol}")
+    return records
+
+
+def download_and_split_stock_data(
+    train_path: Path,
+    test_path: Path,
+    symbol: str = "aapl",
+    split_ratio: float = 0.8,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    force_download: bool = False,
+):
+    """
+    Tai du lieu tu stooq và tách train/test theo split_ratio. Ghi đè khi force_download=True
+    hoặc khi file chưa tồn tại.
+    """
+    if train_path.exists() and test_path.exists() and not force_download:
+        return
+
+    if not (0.0 < split_ratio < 1.0):
+        raise ValueError("split_ratio phai trong (0, 1).")
+
+    records = download_stock_history(symbol, start_date=start_date, end_date=end_date)
+    if len(records) < 50:
+        raise RuntimeError(f"Du lieu qua ngan ({len(records)} diem). Hay chon symbol hoac khoang thoi gian khac.")
+
+    split_idx = int(len(records) * split_ratio)
+    split_idx = max(1, min(split_idx, len(records) - 1))
+    train_records = records[:split_idx]
+    test_records = records[split_idx:]
+
+    train_path.parent.mkdir(parents=True, exist_ok=True)
+    test_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def write_csv(path: Path, rows):
+        with open(path, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Date", "Close"])
+            for dt, close in rows:
+                writer.writerow([dt.strftime("%Y-%m-%d"), f"{close:.4f}"])
+
+    write_csv(train_path, train_records)
+    write_csv(test_path, test_records)
 
 
 def load_stock_data(path: Path) -> np.ndarray:

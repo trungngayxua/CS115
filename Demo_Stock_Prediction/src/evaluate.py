@@ -9,7 +9,6 @@ from utils import (
     MinMaxScaler,
     compute_metrics,
     create_sequences,
-    ensure_demo_data,
     load_stock_data,
     plot_predictions,
     save_metrics,
@@ -40,11 +39,15 @@ def main():
 
     train_path = data_dir / "train_data.csv"
     test_path = data_dir / "test_data.csv"
-    ensure_demo_data(train_path, test_path)
+    if not train_path.exists() or not test_path.exists():
+        raise FileNotFoundError(
+            "Khong tim thay data/train_data.csv va data/test_data.csv. Hay chay train.py de tai du lieu tu mang."
+        )
 
     with open(parameters_dir / "scaler_params.pkl", "rb") as f:
         scaler_params = pickle.load(f)
     lookback = args.lookback or int(scaler_params.get("lookback", 20))
+    data_source = scaler_params.get("data_source", "unknown")
 
     scaler = MinMaxScaler()
     scaler.load_params(scaler_params["min_"], scaler_params["max_"])
@@ -72,7 +75,7 @@ def main():
     plot_predictions(targets, preds, results_dir / "test_prediction_chart.png")
 
     print(f"Test RMSE: {rmse:.6f} | MAE: {mae:.6f}")
-    print("Da luu metrics va bieu do vao", results_dir)
+    print(f"Da luu metrics va bieu do vao {results_dir} (data_source={data_source})")
 
 
 if __name__ == "__main__":
