@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  8 JAN 2026 19:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.28)  9 JAN 2026 12:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1848,8 +1848,12 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [45
 
 ]
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1151--1151
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1165--1165
  [][][][]  
+ []
+
+
+Overfull \vbox (6.87685pt too high) detected at line 1165
  []
 
 
@@ -1862,10 +1866,15 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 [46
 
 ]
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1174--1174
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1175--1175
  [][][][]  
  []
 
+<611862241_1268077568536299_6065835046817082129_n.png, id=1354, 876.27374pt x 549.05125pt>
+File: 611862241_1268077568536299_6065835046817082129_n.png Graphic file (type png)
+<use 611862241_1268077568536299_6065835046817082129_n.png>
+Package pdftex.def Info: 611862241_1268077568536299_6065835046817082129_n.png  used on input line 1175.
+(pdftex.def)             Requested size: 325.17949pt x 203.74898pt.
 
 
 
@@ -1875,21 +1884,11 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 
 [47
 
-]
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1195--1195
+ <./611862241_1268077568536299_6065835046817082129_n.png>]
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1198--1198
  [][][][]  
  []
 
-<template-1_image_page29_1.png, id=1382, 302.63063pt x 98.61844pt>
-File: template-1_image_page29_1.png Graphic file (type png)
-<use template-1_image_page29_1.png>
-Package pdftex.def Info: template-1_image_page29_1.png  used on input line 1195.
-(pdftex.def)             Requested size: 164.30028pt x 53.54056pt.
-<template-1_image_page29_2.png, id=1383, 263.48438pt x 224.33812pt>
-File: template-1_image_page29_2.png Graphic file (type png)
-<use template-1_image_page29_2.png>
-Package pdftex.def Info: template-1_image_page29_2.png  used on input line 1195.
-(pdftex.def)             Requested size: 164.30028pt x 139.89604pt.
 
 
 
@@ -1899,16 +1898,11 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 
 [48
 
- <./template-1_image_page29_1.png (PNG copy)> <./template-1_image_page29_2.png (PNG copy)>]
-Overfull \hbox (92.25732pt too wide) in paragraph at lines 1205--1205
+]
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1221--1221
  [][][][]  
  []
 
-<611862241_1268077568536299_6065835046817082129_n.png, id=1410, 876.27374pt x 549.05125pt>
-File: 611862241_1268077568536299_6065835046817082129_n.png Graphic file (type png)
-<use 611862241_1268077568536299_6065835046817082129_n.png>
-Package pdftex.def Info: 611862241_1268077568536299_6065835046817082129_n.png  used on input line 1205.
-(pdftex.def)             Requested size: 325.17949pt x 203.74898pt.
 
 
 
@@ -1918,7 +1912,31 @@ Overfull \hbox (92.25732pt too wide) has occurred while \output is active
 
 [49
 
- <./611862241_1268077568536299_6065835046817082129_n.png>]
+]
+Overfull \hbox (92.25732pt too wide) in paragraph at lines 1244--1244
+ [][][][]  
+ []
+
+<template-1_image_page29_1.png, id=1437, 302.63063pt x 98.61844pt>
+File: template-1_image_page29_1.png Graphic file (type png)
+<use template-1_image_page29_1.png>
+Package pdftex.def Info: template-1_image_page29_1.png  used on input line 1244.
+(pdftex.def)             Requested size: 164.30028pt x 53.54056pt.
+<template-1_image_page29_2.png, id=1438, 263.48438pt x 224.33812pt>
+File: template-1_image_page29_2.png Graphic file (type png)
+<use template-1_image_page29_2.png>
+Package pdftex.def Info: template-1_image_page29_2.png  used on input line 1244.
+(pdftex.def)             Requested size: 164.30028pt x 139.89604pt.
+
+
+
+Overfull \hbox (92.25732pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[50
+
+ <./template-1_image_page29_1.png (PNG copy)> <./template-1_image_page29_2.png (PNG copy)>]
 \tf@nav=\write6
 \openout6 = `CS115.nav'.
 
@@ -1941,18 +1959,18 @@ Package rerunfilecheck Info: File `CS115.out' has not changed.
 (rerunfilecheck)             Checksum: B8156ADD761A6A84CD3D98BDB3D05B35;634.
  ) 
 Here is how much of TeX's memory you used:
- 30154 strings out of 469220
- 580937 string characters out of 5462267
- 1356312 words of memory out of 5000000
- 57899 multiletter control sequences out of 15000+600000
+ 30158 strings out of 469220
+ 580974 string characters out of 5462267
+ 1356348 words of memory out of 5000000
+ 57901 multiletter control sequences out of 15000+600000
  673012 words of font info for 149 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  128i,17n,123p,436b,1434s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0800.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso0900.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1000.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnitt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnss8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vnssbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on CS115.pdf (49 pages, 649758 bytes).
+Output written on CS115.pdf (50 pages, 654618 bytes).
 PDF statistics:
- 1567 PDF objects out of 1728 (max. 8388607)
- 1372 compressed objects within 14 object streams
- 102 named destinations out of 1000 (max. 500000)
+ 1595 PDF objects out of 1728 (max. 8388607)
+ 1398 compressed objects within 14 object streams
+ 104 named destinations out of 1000 (max. 500000)
  165 words of extra memory for PDF output out of 10000 (max. 10000000)
 

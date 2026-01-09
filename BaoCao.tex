@@ -40,6 +40,7 @@
         Nhóm thực hiện: & Nhóm 6 \\
         & Lê Quang Trung \\
         & Nguyễn Ngọc Hưng \\
+        & Trần Lê Anh Pha
     \end{tabular}
 
     \vfill
@@ -107,11 +108,20 @@ Các công thức đạo hàm chính cho RNN many-to-many:
     \end{tabular}
     \caption{Hiệu năng dự báo trên tập kiểm tra.}
 \end{table}
-\textbf{Kết luận}:
-\begin{itemize}
-  \item Kết quả RMSE $\approx 136.39$ và MAE $\approx 135.67$ vẫn còn lớn so với biên độ giá trong demo (khoảng $220$--$540$), cho thấy sai số trung bình ở mức hàng trăm đơn vị nên giá trị dự báo thực tế còn hạn chế. Đường dự báo thường bám quanh mức trung bình và bị trễ so với biến động thực; clipping chủ yếu giúp tránh exploding gradient chứ chưa cải thiện đáng kể năng lực mô hình. \\
-\end{itemize}
-\textbf{Lý do chính}:
+\subsection{Kết quả}
+% \begin{itemize}
+%   \item Kết quả RMSE $\approx 136.39$ và MAE $\approx 135.67$ vẫn còn lớn so với biên độ giá trong demo (khoảng $220$--$540$), cho thấy sai số trung bình ở mức hàng trăm đơn vị nên giá trị dự báo thực tế còn hạn chế. Đường dự báo thường bám quanh mức trung bình và bị trễ so với biến động thực; clipping chủ yếu giúp tránh exploding gradient chứ chưa cải thiện đáng kể năng lực mô hình. \\
+% \end{itemize}
+  Kết quả RMSE $\approx 136.39$ và MAE $\approx 135.67$ vẫn còn lớn so với biên độ giá trong demo (khoảng $220$--$540$), cho thấy sai số trung bình ở mức hàng trăm đơn vị nên giá trị dự báo thực tế còn hạn chế. Đường dự báo thường bám quanh mức trung bình và bị trễ so với biến động thực; clipping chủ yếu giúp tránh exploding gradient chứ chưa cải thiện đáng kể năng lực mô hình. \\
+% \textbf{Lý do chính}:
+% \begin{itemize}
+%     \item \textbf{Kiến trúc quá cơ bản}: RNN thuần không có cơ chế cổng (LSTM/GRU), nên khả năng giữ thông tin dài hạn yếu và nhạy với vanishing/exploding.
+%     \item \textbf{Dung lượng mô hình nhỏ}: Chỉ 1 lớp với hidden 16 khiến mô hình dễ underfit trước động lực giá phức tạp.
+%     \item \textbf{Tín hiệu học tập mỏng}: Loss chỉ lấy ở bước cuối làm gradient học được từ chuỗi bị hạn chế, khó khai thác cấu trúc theo thời gian.
+%     \item \textbf{Tối ưu hóa đơn giản}: Full-batch GD với learning rate cố định và chỉ dùng clipping giúp ổn định nhưng không tăng năng lực dự báo.
+%     \item \textbf{Đầu vào tối giản}: Chỉ dùng chuỗi Close và dự báo giá tuyệt đối làm bài toán khó hơn, mô hình nhỏ dễ học quanh mức trung bình.
+% \end{itemize}
+\subsection{Lý do chính}
 \begin{itemize}
     \item \textbf{Kiến trúc quá cơ bản}: RNN thuần không có cơ chế cổng (LSTM/GRU), nên khả năng giữ thông tin dài hạn yếu và nhạy với vanishing/exploding.
     \item \textbf{Dung lượng mô hình nhỏ}: Chỉ 1 lớp với hidden 16 khiến mô hình dễ underfit trước động lực giá phức tạp.

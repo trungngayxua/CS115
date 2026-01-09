@@ -47,7 +47,7 @@
     \begin{itemize}
         \item Lê Quang Trung --- MSSV: 24521883
         \item Nguyễn Ngọc Hưng --- MSSV: 24520610
-        \item Trần Lê Anh Pha --- MSSV:
+        \item Trần Lê Anh Pha --- MSSV: 24521287
     \end{itemize}
 \end{frame}
 
@@ -1127,6 +1127,53 @@ ngay cả trong trường hợp tuyến tính đơn giản.
 
 \end{frame}
 
+\begin{frame}{Demo Vanishing Exploding Gradients}
+    \textbf{Mục tiêu}
+    \begin{itemize}[leftmargin=*]
+        \item Quan sát norm gradient $\lVert \nabla_{W_{hh}} \rVert$ dưới ba giá trị $\rho$ để thấy rõ vanishing, exploding và trường hợp ổn định.
+        \item Liên hệ trực tiếp với điều kiện phổ của $W_{hh}$ vừa phân tích.
+    \end{itemize}
+    \medskip
+    \begin{columns}[T]
+        \column{0.52\linewidth}
+        \textbf{Dữ liệu \& mã hóa}
+        \begin{itemize}[leftmargin=*]
+            \item Câu ``the quick brown fox jumps over the lazy dog.'' viết thường, lặp 200 lần.
+            \item One-hot trên vocab size $= 28$.
+        \end{itemize}
+        \medskip
+        \textbf{Mô hình}
+        \begin{itemize}[leftmargin=*]
+            \item RNN một lớp, hidden size $= 50$, ReLU.
+            \item Chuỗi huấn luyện dài $50$ bước; khởi tạo Gaussian, nhân $W_{hh}$ với hệ số $\rho$ để chỉnh bán kính phổ.
+        \end{itemize}
+
+        \column{0.48\linewidth}
+        \textbf{Kịch bản $\rho$}
+        \begin{itemize}[leftmargin=*]
+            \item $\rho = 0.9$: vanishing.
+            \item $\rho = 1.2$: exploding.
+            \item $\rho = 0.99$: tương đối ổn định.
+        \end{itemize}
+        \medskip
+        \textbf{Huấn luyện \& ghi nhận}
+        \begin{itemize}[leftmargin=*]
+            \item 200 bước, learning rate $= 10^{-4}$; reset hidden state khi hết chuỗi.
+            \item Log $\lVert \nabla_{W_{hh}} \rVert$ sau mỗi bước; vẽ biểu đồ thang log.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Kết quả thực nghiệm vanishing and exploding}
+    \begin{center}
+    \IfFileExists{611862241_1268077568536299_6065835046817082129_n.png}{%
+        \includegraphics[width=0.95\linewidth]{611862241_1268077568536299_6065835046817082129_n.png}%
+    }{%
+        \fbox{\parbox{0.85\linewidth}{\centering \scriptsize Missing image: 611862241\_1268077568536299\_6065835046817082129\_n.png}}%
+    }
+    \end{center}
+\end{frame}
+
 \begin{frame}{Giải pháp 1: Gradient Clipping}
 
 Gradient clipping giới hạn độ lớn gradient trong quá trình cập nhật.
@@ -1181,7 +1228,8 @@ mà không bị vanishing hoặc exploding nghiêm trọng.
             \includegraphics[width=\linewidth]{template-1_image_page29_1.png}%
         }{%
             \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page29\_1.png}}%
-        }
+        }\\[0.3em]
+        \scriptsize Gradient Clipping
     \end{minipage}\hfill
     \begin{minipage}{0.48\linewidth}
         \centering
@@ -1189,20 +1237,10 @@ mà không bị vanishing hoặc exploding nghiêm trọng.
             \includegraphics[width=\linewidth]{template-1_image_page29_2.png}%
         }{%
             \fbox{\parbox{0.9\linewidth}{\centering \scriptsize Missing image: template-1\_image\_page29\_2.png}}%
-        }
+        }\\[0.3em]
+        \scriptsize LSTM
     \end{minipage}
     \end{center}
 \end{frame}
-
-\begin{frame}{Kết quả thực nghiệm vanishing and exploding}
-    \begin{center}
-    \IfFileExists{611862241_1268077568536299_6065835046817082129_n.png}{%
-        \includegraphics[width=0.95\linewidth]{611862241_1268077568536299_6065835046817082129_n.png}%
-    }{%
-        \fbox{\parbox{0.85\linewidth}{\centering \scriptsize Missing image: 611862241\_1268077568536299\_6065835046817082129\_n.png}}%
-    }
-    \end{center}
-\end{frame}
-
 
 \end{document}
